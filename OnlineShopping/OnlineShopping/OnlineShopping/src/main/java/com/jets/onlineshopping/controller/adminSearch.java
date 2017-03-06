@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Eslam
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/SearchServlet"})
-public class SearchServlet extends HttpServlet {
+@WebServlet(name = "/admin/search", urlPatterns = {"/admin/search"})
+public class adminSearch extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +39,7 @@ public class SearchServlet extends HttpServlet {
         ArrayList<Product> products;
         
         if(searchCategory==null || searchText == null){
-            response.sendRedirect("HomeServlet");
+            response.sendRedirect("home");
             return;
         }
             
@@ -49,7 +49,7 @@ public class SearchServlet extends HttpServlet {
             products = new DBHandler().searchProductByCategory(searchText.toLowerCase(), searchCategory.toLowerCase());
         }
         request.setAttribute("homeProducts", products);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        request.getRequestDispatcher("products.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,9 +1,10 @@
+package com.jets.onlineshopping.controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jets.onlineshopping.controller;
 
 import com.jets.onlineshopping.dao.DBHandler;
 import com.jets.onlineshopping.dto.Product;
@@ -20,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Eslam
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/SearchServlet"})
-public class SearchServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/admin/home"})
+public class adminHome extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,22 +35,31 @@ public class SearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String searchText = request.getParameter("searchText");
-        String searchCategory = request.getParameter("searchCategory");
-        ArrayList<Product> products;
-        
-        if(searchCategory==null || searchText == null){
-            response.sendRedirect("HomeServlet");
-            return;
-        }
-            
-        if (searchCategory.equalsIgnoreCase("ALL")) {
-            products = new DBHandler().searchAllProducts(searchText.toLowerCase());
+        ArrayList<Product> homeProducts;
+        if (request.getParameterMap().containsKey("category")) {
+            String category = request.getParameter("category").toLowerCase();
+            System.out.println(category);
+            switch (category) {
+                case "electronics":
+                    homeProducts = new DBHandler().getProducts("electronics");
+                    break;
+                case "clothes":
+                    homeProducts = new DBHandler().getProducts("clothes");
+                    System.out.println("clothes");
+                    break;
+                case "books":
+                    homeProducts = new DBHandler().getProducts("books");
+                    break;
+                default:
+                        homeProducts = new DBHandler().getProducts();            
+            }
         } else {
-            products = new DBHandler().searchProductByCategory(searchText.toLowerCase(), searchCategory.toLowerCase());
+        homeProducts = new DBHandler().getProducts();            
         }
-        request.setAttribute("homeProducts", products);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+
+        request.setAttribute("homeProducts", homeProducts);
+        request.getRequestDispatcher("products.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

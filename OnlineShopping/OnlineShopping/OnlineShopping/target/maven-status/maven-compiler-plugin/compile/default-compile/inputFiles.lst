@@ -1,17 +1,22 @@
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\BuyServlet.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\ProductDetails.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dto\CartItem.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\AddCartServlet.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\SignOutServlet.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\SessionListener.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dao\DBHandler.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\LoginServlet.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dto\Product.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\HomeServlet.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dto\Coupon.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\EditProfile.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\RemoveCartItem.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\SignUpServlet.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dto\User.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\SearchServlet.java
-D:\ITI\Focus\ServletJSP\Versions\Current\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dto\Order.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\BuyServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\SearchServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\admin\controller\EditProductButtonServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\AddCartServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\SignOutServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\admin\controller\ProductDetailsButton.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\SignUpServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\admin\controller\AddNewProductServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\EditProfile.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\RemoveCartItem.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dto\User.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\HomeServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\SessionListener.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dto\Order.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\admin\controller\EditProductServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\admin\controller\RemoveProductButtonServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dao\DBHandler.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dto\CartItem.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dto\Coupon.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\dto\Product.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\LoginServlet.java
+C:\Users\Eslam\Desktop\Toqa's Repo\OnlineShoppingWebsite\OnlineShopping\OnlineShopping\OnlineShopping\src\main\java\com\jets\onlineshopping\controller\ProductDetails.java
