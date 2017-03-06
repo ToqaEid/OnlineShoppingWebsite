@@ -36,28 +36,8 @@ public class SignOutServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User logged;
-        ArrayList<CartItem> products;
-        DBHandler db = new DBHandler();
-        HttpSession session = request.getSession(false);
-        System.err.println("session:" + session);
-        if (session == null) {
-            System.err.println("session == null");
-            request.getRequestDispatcher("HomeServlet").forward(request, response);
-            return;
-        }
-        if ((logged = (User) session.getAttribute("logged")) == null) {
-            System.err.println("no logged user");
-            request.getRequestDispatcher("HomeServlet").forward(request, response);
-            return;
-        }
-        if ((products = (ArrayList<CartItem>) session.getAttribute("products")) != null) {
-            for (CartItem item : products) {
-                db.insertCartItem(item, logged.getEmail());
-                System.err.println("inserting in DB");
-            }
-        }
-
+        HttpSession session = request.getSession(true);
+        
         session.invalidate();
         System.err.println("session invalidated");
         request.getRequestDispatcher("HomeServlet").forward(request, response);
