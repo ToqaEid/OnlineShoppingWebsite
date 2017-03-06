@@ -49,18 +49,18 @@
                         <img src="themes/images/logo.png" alt="Bootsshop"/>
                     </a>
                     <form class="form-inline navbar-search" method="post" action="search" >
-                            <input name="searchText" id="srchFld" class="srchTxt" type="text" style="width:60%;"/>
-                            <select name="searchCategory" class="srchTxt">
-                                <option>All</option>
-                                <option>mobiles</option>
-                                <option>Laptops</option>
-                                <option>HEALTH & BEAUTY </option>
-                                <option>SPORTS & LEISURE </option>
-                                <option>BOOKS & ENTERTAINMENTS </option>
-                            </select> 
-                            <button type="submit" id="submitButton" class="btn btn-primary">Search</button>
-                        </form>
-                    
+                        <input name="searchText" id="srchFld" class="srchTxt" type="text" style="width:60%;"/>
+                        <select name="searchCategory" class="srchTxt">
+                            <option>All</option>
+                            <option>mobiles</option>
+                            <option>Laptops</option>
+                            <option>HEALTH & BEAUTY </option>
+                            <option>SPORTS & LEISURE </option>
+                            <option>BOOKS & ENTERTAINMENTS </option>
+                        </select> 
+                        <button type="submit" id="submitButton" class="btn btn-primary">Search</button>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -70,45 +70,7 @@
         <div class="container">
             <div class="row">
                 <!-- Sidebar ================================================== -->
-                <div id="sidebar" class="span3">
-                    <div class="well well-small"><a id="myCart"><img src="themes/images/ico-cart.png" alt="cart">Coupons remaining
-                            <a href="#genertate" role="button" data-toggle="modal" style="padding-right:0"><span class="badge badge-warning pull-right">Genertate</span></a>
-                            <div id="genertate" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                                    <h3>Generate Coupons</h3>
-                                </div>
-                                <div class="modal-body">
-                                        <form action="GenerateCoupons" method="post" class="form-horizontal loginFrm">
-                                            <div class="control-group">
-                                                <label for="coupons_credit">Coupons Credit</Label>
-                                                <input type="text" name="coupons_credit" id="coupons_credit">
-                                                
-                                            </div>
-                                            <div class="control-group">
-                                                <label for="coupons_num">Number Of Coupons</Label>
-                                                <input type="number" class="span1" id="coupons_num" name="coupons_num" value="1" min="1" max="1000	">
-                                                
-                                            </div>
-											<hr>
-                                            <button type="submit" class="btn btn-success">Generate</button>
-                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                        </form>	
-                                    </div>
-                            </div>
-                    </div>
-                    <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="customer_profiles.html">CUSTOMER PROFILES</a></li>
-                        <li><a href="/OnlineShopping/admin/add_product.jsp">NEW ARRIVAL</a></li>
-                        <li><a href='home'>All</a></li>
-                        <li><a href='home?category=electronics'>Electronics</a></li>
-                        <li><a href='home?category=clothes'>Clothes</a></li>
-                        <li><a href='home?category=books'>Books</a></li>
-                    </ul>
-                    <br/>
-
-
-                </div>
+                <jsp:include page="Sidebar.jsp"/>
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
@@ -125,100 +87,100 @@
                         <div class="tab-pane  active" id="blockView">
                             <ul class="thumbnails">
                                 <c:forEach items="${requestScope.homeProducts}" var="product">
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details.html"><img src="${product.url}" alt=""/></a>
-                                        <div class="caption">
-                                            <h5><c:out value="${product.name}"/></h5>
-                                            <p> 
-                                                <a class="btn btn-primary">$<c:out value="${product.price}"/></a>
-                                            </p>
-                                            <h4 style="text-align:center">
-                                                <a class="btn" href="/OnlineShopping/ProductDetailsButton?pId=${product.id}"> <i class="icon-zoom-in"></i></a>
-                                                <a class="btn" href="/OnlineShopping/EditProductServlet?pId=${product.id}"><i class="icon-edit"></i></a> 
-                                                <a class="btn" href="/OnlineShopping/RemoveProductButtonServlet?pId=${product.id}"><i class="icon-trash"></i></a>
-                                            </h4>
+                                    <li class="span3">
+                                        <div class="thumbnail">
+                                            <a href="product_details.html"><img src="${product.url}" alt=""/></a>
+                                            <div class="caption">
+                                                <h5><c:out value="${product.name}"/></h5>
+                                                <p> 
+                                                    <a class="btn btn-primary">$<c:out value="${product.price}"/></a>
+                                                </p>
+                                                <h4 style="text-align:center">
+                                                    <a class="btn" href="/OnlineShopping/ProductDetailsButton?pId=${product.id}"> <i class="icon-zoom-in"></i></a>
+                                                    <a class="btn" href="/OnlineShopping/EditProductServlet?pId=${product.id}"><i class="icon-edit"></i></a> 
+                                                    <a class="btn" href="/OnlineShopping/RemoveProductButtonServlet?pId=${product.id}"><i class="icon-trash"></i></a>
+                                                </h4>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
                                 </c:forEach>
-<!--                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                                        <div class="caption">
-                                            <h5>Manicure &amp; Pedicure</h5>
-                                            <p> 
-                                                <a class="btn btn-primary">&euro;222.00</a>
-                                            </p>
-                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#"><i class="icon-edit"></i></a> <a class="btn" href="#"><i class="icon-trash"></i></a></h4>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                                        <div class="caption">
-                                            <h5>Manicure &amp; Pedicure</h5>
-                                            <p> 
-                                                <a class="btn btn-primary">&euro;222.00</a>
-                                            </p>
-                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#"><i class="icon-edit"></i></a> <a class="btn" href="#"><i class="icon-trash"></i></a></h4>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                                        <div class="caption">
-                                            <h5>Manicure &amp; Pedicure</h5>
-                                            <p> 
-                                                <a class="btn btn-primary">&euro;222.00</a>
-                                            </p>
-                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#"><i class="icon-edit"></i></a> <a class="btn" href="#"><i class="icon-trash"></i></a></h4>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                                        <div class="caption">
-                                            <h5>Manicure &amp; Pedicure</h5>
-                                            <p> 
-                                                <a class="btn btn-primary">&euro;222.00</a>
-                                            </p>
-                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#"><i class="icon-edit"></i></a> <a class="btn" href="#"><i class="icon-trash"></i></a></h4>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                                        <div class="caption">
-                                            <h5>Manicure &amp; Pedicure</h5>
-                                            <p> 
-                                                <a class="btn btn-primary">&euro;222.00</a>
-                                            </p>
-                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#"><i class="icon-edit"></i></a> <a class="btn" href="#"><i class="icon-trash"></i></a></h4>
-                                        </div>
-                                    </div>
-                                </li>-->
+                                <!--                                <li class="span3">
+                                                                    <div class="thumbnail">
+                                                                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
+                                                                        <div class="caption">
+                                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                                            <p> 
+                                                                                <a class="btn btn-primary">&euro;222.00</a>
+                                                                            </p>
+                                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#"><i class="icon-edit"></i></a> <a class="btn" href="#"><i class="icon-trash"></i></a></h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="span3">
+                                                                    <div class="thumbnail">
+                                                                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
+                                                                        <div class="caption">
+                                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                                            <p> 
+                                                                                <a class="btn btn-primary">&euro;222.00</a>
+                                                                            </p>
+                                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#"><i class="icon-edit"></i></a> <a class="btn" href="#"><i class="icon-trash"></i></a></h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="span3">
+                                                                    <div class="thumbnail">
+                                                                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
+                                                                        <div class="caption">
+                                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                                            <p> 
+                                                                                <a class="btn btn-primary">&euro;222.00</a>
+                                                                            </p>
+                                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#"><i class="icon-edit"></i></a> <a class="btn" href="#"><i class="icon-trash"></i></a></h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="span3">
+                                                                    <div class="thumbnail">
+                                                                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
+                                                                        <div class="caption">
+                                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                                            <p> 
+                                                                                <a class="btn btn-primary">&euro;222.00</a>
+                                                                            </p>
+                                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#"><i class="icon-edit"></i></a> <a class="btn" href="#"><i class="icon-trash"></i></a></h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="span3">
+                                                                    <div class="thumbnail">
+                                                                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
+                                                                        <div class="caption">
+                                                                            <h5>Manicure &amp; Pedicure</h5>
+                                                                            <p> 
+                                                                                <a class="btn btn-primary">&euro;222.00</a>
+                                                                            </p>
+                                                                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#"><i class="icon-edit"></i></a> <a class="btn" href="#"><i class="icon-trash"></i></a></h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>-->
                             </ul>
                             <hr class="soft"/>
                         </div>
                     </div>
 
 
-<!--                    <div class="pagination">
-                        <ul>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
-                        </ul>
-                    </div>-->
+                    <!--                    <div class="pagination">
+                                            <ul>
+                                                <li><a href="#">&lsaquo;</a></li>
+                                                <li><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">...</a></li>
+                                                <li><a href="#">&rsaquo;</a></li>
+                                            </ul>
+                                        </div>-->
                     <br class="clr"/>
                 </div>
             </div>

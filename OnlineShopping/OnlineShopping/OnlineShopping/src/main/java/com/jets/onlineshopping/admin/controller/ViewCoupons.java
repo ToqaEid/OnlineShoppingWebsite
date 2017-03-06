@@ -6,8 +6,11 @@
 package com.jets.onlineshopping.admin.controller;
 
 import com.jets.onlineshopping.dao.DBHandler;
+import com.jets.onlineshopping.dto.Coupon;
+import com.jets.onlineshopping.dto.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,28 +21,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Romisaa
  */
-@WebServlet(name = "GenerateCoupons", urlPatterns = {"/GenerateCoupons"})
-public class GenerateCoupons extends HttpServlet {
+@WebServlet(name = "ViewCoupons", urlPatterns = {"/ViewCoupons"})
+public class ViewCoupons extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        int coupons_credit=Integer.parseInt(request.getParameter("coupons_credit"));
-        int number=Integer.parseInt(request.getParameter("coupons_num"));
-        boolean check = new DBHandler().insertCoupon(coupons_credit, number);
-        System.out.println(check);
-        response.sendRedirect("/OnlineShopping/admin/home");
-       
+        ArrayList<Coupon> coupons = new DBHandler().getCoupons();
+        request.setAttribute("coupons", coupons);
+        request.getRequestDispatcher("admin/coupons.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
