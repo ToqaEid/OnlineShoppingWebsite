@@ -108,8 +108,9 @@
                             </a>
                         </div>
                         <div class="span6">
-                            <form action="AddNewProductServlet" method="get" id="addform">
-                                <h3><input type="text" name="pName" placeholder="Product Name" required></h3>
+                            <form action="/OnlineShopping/AddNewProductServlet" method="get" id="addform">
+
+                                <h3><input type="text" name="pName" placeholder="Product Name" pattern="[a-zA-Z]+.*" oninvalid="setCustomValidity('Name should start with letter')" required></h3>
                                 <hr class="soft"/>
                                 <div>
                                     <label for="">Category</label>
@@ -124,9 +125,9 @@
                                     <hr>
                                 </div>
                                 <div class="control-group">
-                                    <span><input type="text" name="pPrice" placeholder="Price" style="width:10%; " required></span>
+                                    <span><input type="text" name="pPrice" placeholder="Price" style="width:10%; " pattern="[0-9]*" oninvalid="setCustomValidity('Price should contains real or decimal numbers only')" required></span>
                                     <span>
-                                        <input class="quantity" type="text" name="pQuantity" placeholder="Quantity" style="width:10%; margin-left:25%;" required></span>
+                                        <input class="quantity" type="text" name="pQuantity" placeholder="Quantity" style="width:10%; margin-left:25%;" pattern="[0-9]*" oninvalid="setCustomValidity('Price should contains real or decimal numbers only')" required></span>
                                     <button type="submit" class="btn btn-large btn-primary pull-right"> Add </button>
                                 </div>
                         </div>

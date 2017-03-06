@@ -467,7 +467,7 @@ public class DBHandler {
     }
 
     //Table COUPON
-    public boolean insertCoupon(int credit) {
+    /*  public boolean insertCoupon(int credit) {
         long random = (long) (new Random().nextDouble() * 100000000L);
         try {
             preparedStatement = (PreparedStatement) connection.prepareStatement("INSERT INTO coupon VALUES(?,?)");
@@ -479,6 +479,26 @@ public class DBHandler {
             return false;
         }
     }
+     */
+    public Boolean insertCoupon(int credit, int number) {
+        int i = 0;
+        while (i < number) {
+            long random = (long) (new Random().nextDouble() * 100000000L);
+            try {
+                preparedStatement = (PreparedStatement) connection.prepareStatement("INSERT INTO coupon VALUES(?,?)");
+                preparedStatement.setLong(1, random);
+                preparedStatement.setInt(2, credit);
+                i++;
+                preparedStatement.executeUpdate();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return false;
+            }
+            
+        }
+        return true;
+    }
+
 
     public ArrayList<Coupon> getCoupons() {
         ArrayList<Coupon> coupons = new ArrayList<>();

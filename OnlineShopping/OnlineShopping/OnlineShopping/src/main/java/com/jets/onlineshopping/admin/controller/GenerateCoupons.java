@@ -6,7 +6,6 @@
 package com.jets.onlineshopping.admin.controller;
 
 import com.jets.onlineshopping.dao.DBHandler;
-import com.jets.onlineshopping.dto.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author toqae
+ * @author Romisaa
  */
-@WebServlet(name = "AddNewProductServlet", urlPatterns = {"/AddNewProductServlet"})
-public class AddNewProductServlet extends HttpServlet {
+@WebServlet(name = "GenerateCoupons", urlPatterns = {"/GenerateCoupons"})
+public class GenerateCoupons extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,28 +32,14 @@ public class AddNewProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         
-        String name = request.getParameter("pName");
-        String cat = request.getParameter("pCategory");
-        float price = Float.parseFloat(request.getParameter("pPrice"));
-        int quantity = Integer.parseInt(request.getParameter("pQuantity"));
-        String desc = request.getParameter("pDescription");
-        if(desc == null){
-            desc="No Description";
-        }
-        //request.getParameter("pURL");
-        
-        Product pro = new Product(price, quantity, name, desc, cat, " ");
-        //Create DB handler object 
-        DBHandler db = new DBHandler();
-        //add product in db
-        if(db.insertProduct(pro)){
-            response.sendRedirect("/OnlineShopping/admin/home");
-        }else{
-            request.setAttribute("errormsg", "Product is not inserted successfully" );
-            request.getRequestDispatcher("/admin/add_product.jsp").forward(request, response);
-            return;
-        }
+        int coupons_credit=Integer.parseInt(request.getParameter("coupons_credit"));
+        int number=Integer.parseInt(request.getParameter("coupons_num"));
+        boolean check = new DBHandler().insertCoupon(coupons_credit, number);
+        System.out.println(check);
+        response.sendRedirect("admin/products.jsp");
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

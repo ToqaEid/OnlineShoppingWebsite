@@ -111,7 +111,7 @@
                         </div>
                         <div class="span6">
                             <form action="EditProductButtonServlet" method="get" id="edit_p">
-                                <h3><input type="text" name="pName" placeholder="Product Name" value="${requestScope.edit_product.name}" required></h3>
+                                <h3><input type="text" name="pName" placeholder="Product Name" value="${requestScope.edit_product.name}" pattern="[a-zA-Z]+.*" oninvalid="setCustomValidity('Name should start with letter')" required></h3>
                                 <hr class="soft"/>
                                 <div>
                                     <label for="">Category</label>
@@ -181,10 +181,10 @@
                                 </div>
 
                                 <div class="control-group">
-                                    <span><input type="text" name="pPrice" placeholder="Price" value="${requestScope.edit_product.price}" style="width:10%; " required=""></span>
+                                    <span><input type="text" name="pPrice" placeholder="Price" value="${requestScope.edit_product.price}" style="width:10%; " pattern="[0-9]*" oninvalid="setCustomValidity('Please enter numbers only')" required=""></span>
                                     <span>
                                         <input type="hidden" name="pId" value="${requestScope.edit_product.id}">
-                                        <input class="quantity" type="text" name="pQuantity" placeholder="Quantity" value="${requestScope.edit_product.stockQuantity}" style="width:10%; margin-left:25%;" required></span>
+                                        <input class="quantity" type="text" name="pQuantity" placeholder="Quantity" value="${requestScope.edit_product.stockQuantity}" style="width:10%; margin-left:25%;" pattern="[0-9]*" oninvalid="setCustomValidity('Please enter numbers only')" required></span>
                                     <button type="submit" class="btn btn-large btn-primary pull-right"> SAVE </button>
                                 </div>
                         </div>

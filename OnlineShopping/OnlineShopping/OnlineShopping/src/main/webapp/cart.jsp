@@ -129,37 +129,36 @@
 
                                 </tr>
                             </thead>
-                            
+
                             <tbody>
-             
-             <c:set var="count" value="${0}" /> 
-             
-             <c:forEach items="${sessionScope.products}" var="item">
-             <form action="RemoveCartItem" method="post">
-                 <tr>
-                                    <td> <img width="60" src="themes/images/products/4.jpg" alt=""/></td>
-                                    <td><c:out value="${item.value.product.name}"/><br/>
-                                         <c:out value="${item.value.product.description}"/></td>
-                                    <td>
-                                        <div class="input-append">
-                                            <input class="span1" style="max-width:34px" placeholder="${item.value.quantity}" id="appendedInputButtons" size="16" type="text">
-                                            <button class="btn" type="button"><i class="icon-minus"></i></button>
-                                            <button class="btn" type="button"><i class="icon-plus"></i></button>
-                                            <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i></button>
-                                            <input type="hidden" name="pId" value="${item.key}"/>
-                                        </div>
-                                    </td>
-                                    <td><c:out value="${item.value.product.price}"/></td>          
-             
-                                    <c:set var="count" value="${count+item.value.quantity*item.value.product.price}" scope="page"/>
-                 </tr>
-             </form>
-             </c:forEach> 
-                              
-                                <tr>
-                                    <td colspan="4" style="text-align:right"><strong>TOTAL =</strong>  </td>
-                                    <td class="label label-important" style="display:block"> <strong> <c:out value="${pageScope.count}" /> </strong></td>
-                                </tr>
+
+                                <c:set var="count" value="${0}" /> 
+
+                                <c:forEach items="${sessionScope.products}" var="item">
+                                <form action="RemoveCartItem" method="post">
+                                    <tr>
+                                        <td> <img width="60" src="themes/images/products/4.jpg" alt=""/></td>
+                                        <td><c:out value="${item.value.product.name}"/><br/>
+                                            <c:out value="${item.value.product.description}"/></td>
+                                        <td>
+                                            <div class="input-append">
+                                                <input class="span1" style="max-width:34px" placeholder="${item.value.quantity}" id="appendedInputButtons" size="16" type="text">
+                                                <button class="btn"> <a href="DecreaseCartItem?pId=${item.key}" class="icon-minus"></a></button>
+                                                <button class="btn"> <a href="IncreaseCartItem?pId=${item.key}" class="icon-plus"></a></button>
+                                                <button class="btn"> <a href="RemoveCartItem?pId=${item.key}" class="icon-remove icon-white"></a></button>                                <input type="hidden" name="pId" value="${item.key}"/>
+                                            </div>
+                                        </td>
+                                        <td><c:out value="${item.value.product.price}"/></td>          
+
+                                        <c:set var="count" value="${count+item.value.quantity*item.value.product.price}" scope="page"/>
+                                    </tr>
+                                </form>
+                            </c:forEach> 
+
+                            <tr>
+                                <td colspan="4" style="text-align:right"><strong>TOTAL =</strong>  </td>
+                                <td class="label label-important" style="display:block"> <strong> <c:out value="${pageScope.count}" /> </strong></td>
+                            </tr>
                             </tbody>
                         </table>
 

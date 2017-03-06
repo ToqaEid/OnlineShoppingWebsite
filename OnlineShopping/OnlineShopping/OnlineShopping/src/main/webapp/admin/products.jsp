@@ -79,27 +79,27 @@
                                     <h3>Generate Coupons</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="login" method="POST" class="form-horizontal loginFrm">
-                                        <div class="control-group">
-                                            <label for="coupons_credit">Coupons Credit</Label>
-                                            <input type="text" name="coupons_credit" id="coupons_credit" placeholder="10">
-
-                                        </div>
-                                        <div class="control-group">
-                                            <label for="coupons_num">Number Of Coupons</Label>
-                                            <input type="number" class="span1" id="coupons_num" name="coupons_num" value="0" min="0" max="10	">
-
-                                        </div>
-                                        <hr>
-                                        <button type="submit" class="btn btn-success">Generate</button>
-                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                    </form>	
-                                </div>
+                                        <form action="GenerateCoupons" method="post" class="form-horizontal loginFrm">
+                                            <div class="control-group">
+                                                <label for="coupons_credit">Coupons Credit</Label>
+                                                <input type="text" name="coupons_credit" id="coupons_credit">
+                                                
+                                            </div>
+                                            <div class="control-group">
+                                                <label for="coupons_num">Number Of Coupons</Label>
+                                                <input type="number" class="span1" id="coupons_num" name="coupons_num" value="1" min="1" max="1000	">
+                                                
+                                            </div>
+											<hr>
+                                            <button type="submit" class="btn btn-success">Generate</button>
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                        </form>	
+                                    </div>
                             </div>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
                         <li><a href="customer_profiles.html">CUSTOMER PROFILES</a></li>
-                        <li><a href="add_product.html">NEW ARRIVAL</a></li>
+                        <li><a href="/OnlineShopping/admin/add_product.jsp">NEW ARRIVAL</a></li>
                         <li><a href='home'>All</a></li>
                         <li><a href='home?category=electronics'>Electronics</a></li>
                         <li><a href='home?category=clothes'>Clothes</a></li>
@@ -134,9 +134,9 @@
                                                 <a class="btn btn-primary">$<c:out value="${product.price}"/></a>
                                             </p>
                                             <h4 style="text-align:center">
-                                                <a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a>
-                                                <a class="btn" href="product_details.html"><i class="icon-edit"></i></a> 
-                                                <a class="btn" href="#"><i class="icon-trash"></i></a>
+                                                <a class="btn" href="/OnlineShopping/ProductDetailsButton?pId=${product.id}"> <i class="icon-zoom-in"></i></a>
+                                                <a class="btn" href="/OnlineShopping/EditProductServlet?pId=${product.id}"><i class="icon-edit"></i></a> 
+                                                <a class="btn" href="/OnlineShopping/RemoveProductButtonServlet?pId=${product.id}"><i class="icon-trash"></i></a>
                                             </h4>
                                         </div>
                                     </div>

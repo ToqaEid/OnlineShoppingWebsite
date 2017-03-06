@@ -3,24 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jets.onlineshopping.admin.controller;
+package com.jets.onlineshopping.controller;
 
-import com.jets.onlineshopping.dao.DBHandler;
-import com.jets.onlineshopping.dto.Product;
+import com.jets.onlineshopping.dto.CartItem;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author toqae
+ * @author Romisaa
  */
-@WebServlet(name = "AddNewProductServlet", urlPatterns = {"/AddNewProductServlet"})
-public class AddNewProductServlet extends HttpServlet {
+@WebServlet(name = "DecreaseCartItem", urlPatterns = {"/DecreaseCartItem"})
+public class DecreaseCartItem extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,28 +34,18 @@ public class AddNewProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String name = request.getParameter("pName");
-        String cat = request.getParameter("pCategory");
-        float price = Float.parseFloat(request.getParameter("pPrice"));
-        int quantity = Integer.parseInt(request.getParameter("pQuantity"));
-        String desc = request.getParameter("pDescription");
-        if(desc == null){
-            desc="No Description";
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(true);
+        HashMap<Integer, CartItem> cartItems = (HashMap<Integer, CartItem>) session.getAttribute("products");
+        int ProductId = Integer.parseInt(request.getParameter("pId"));
+        CartItem cartItem = cartItems.get(ProductId);
+        if (cartItem.getQuantity() != 1) {
+            cartItem.setQuantity(cartItem.getQuantity() - 1);
         }
-        //request.getParameter("pURL");
-        
-        Product pro = new Product(price, quantity, name, desc, cat, " ");
-        //Create DB handler object 
-        DBHandler db = new DBHandler();
-        //add product in db
-        if(db.insertProduct(pro)){
-            response.sendRedirect("/OnlineShopping/admin/home");
-        }else{
-            request.setAttribute("errormsg", "Product is not inserted successfully" );
-            request.getRequestDispatcher("/admin/add_product.jsp").forward(request, response);
-            return;
-        }
+        cartItems.put(ProductId, cartItem);
+        // session.setAttribute("products", cartItems);
+        response.sendRedirect("cart.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
