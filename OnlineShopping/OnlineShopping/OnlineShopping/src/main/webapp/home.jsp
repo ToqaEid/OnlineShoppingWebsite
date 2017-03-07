@@ -62,6 +62,18 @@
                     <jsp:include page="sidebar.jsp"/>
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
+                        <c:if test="${!empty requestScope.errorMsg}">
+                            <div class="alert alert-block alert-error fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <c:out value="${requestScope.errorMsg}"/>
+                            </div>
+                        </c:if>
+                        <c:if test="${!empty requestScope.success}">
+                            <div class="alert alert-block alert-success fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <c:out value="${requestScope.success}"/>
+                            </div>
+                        </c:if>
                         <h4>Category Products </h4>
                         <ul class="thumbnails">
                             <c:forEach items="${requestScope.homeProducts}" var="product">
@@ -213,4 +225,35 @@
         </div>
         <span id="themesBtn"></span>
     </body>
+      <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $(login_failed).hide();
+            
+            var showLogin = function () {
+                $(login).modal("show");
+            };
+            
+            <c:if test="${!empty requestScope.login_failed}">
+                // Show Login block
+                showLogin();
+                // Show error alert in Login block
+                $(login_failed).show();
+            </c:if>
+                
+            $(login_form).submit(function() {
+                try {
+                    validateEmail($(input_email).val());
+                } catch (ex) {
+                  $(login_failed).html("Inalid email."); 
+                  $(login_failed).show();
+                  return false;
+                }
+            });
+                
+            $(btn_login).click(function () {
+                $(login_failed).hide();
+            }); 
+        });
+    </script>
 </html>

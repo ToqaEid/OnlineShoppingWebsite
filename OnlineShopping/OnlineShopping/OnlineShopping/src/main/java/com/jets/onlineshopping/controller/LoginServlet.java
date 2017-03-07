@@ -56,16 +56,21 @@ public class LoginServlet extends HttpServlet {
                 }
                 session.setAttribute("products", cartItemsOnSession);
                 db.deleteAllCartItems(userEmail);
-                
-                if(refererUri.equals("/login.jsp")){
+
+                if (refererUri.equals("/login.jsp")) {
                     response.sendRedirect("HomeServlet");
-                }
-                else{
+                } else {
+                    if (refererUri.equals("/home.jsp")) {
+                        response.sendRedirect("HomeServlet");
+                        return;
+                    }
                     request.getRequestDispatcher(request.getParameter("refererUri")).forward(request, response);
                 }
             } else {
                 // Wrong email or password
-                response.sendRedirect("HomeServlet");
+                request.setAttribute("login_failed", true);
+                request.getRequestDispatcher("HomeServlet").forward(request, response);
+                return;
             }
         } else {
             response.sendRedirect("HomeServlet");

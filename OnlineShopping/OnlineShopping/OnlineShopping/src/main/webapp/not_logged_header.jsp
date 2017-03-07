@@ -49,11 +49,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <form action="login" method="POST" class="form-horizontal loginFrm">
+                                            <div id="login_failed" class="alert alert-block alert-error fade in" style="margin: 0px 14px; width: 180px;">
+                                                Incorrect email or password.
+                                            </div>
                                             <div class="control-group">								
-                                                <input type="text" name="email" id="inputEmail" placeholder="Email">
+                                                <input type="text" name="email" id="inputEmail" placeholder="Email" required="true">
                                             </div>
                                             <div class="control-group">
-                                                <input type="password" name="password" id="inputPassword" placeholder="Password">
+                                                <input type="password" name="password" id="inputPassword" placeholder="Password" required="true">
                                             </div>
                                             <div class="control-group">
                                                 <label class="checkbox">

@@ -33,6 +33,8 @@ public class EditProductButtonServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String url = request.getParameter("url").equals("")?"default_image.jpg":request.getParameter("url");
+        System.out.println(url);
         int pId = Integer.parseInt(request.getParameter("pId"));
         String name = request.getParameter("pName");
         String cat = request.getParameter("pCategory");
@@ -45,12 +47,12 @@ public class EditProductButtonServlet extends HttpServlet {
         //request.getParameter("pURL");
         
         //create product object with details
-        Product pro = new Product(pId, price, quantity, name, desc, cat, " ");
+        Product pro = new Product(pId, price, quantity, name, desc, cat, url);
         //Create DB handler object 
         DBHandler db = new DBHandler();
         //update product in db
         if(db.updateProduct(pro)){
-            response.sendRedirect("admin/home");
+            response.sendRedirect("admin");
         }else{
             request.setAttribute("errormsg", "Product is not updated");
             request.getRequestDispatcher("/OnlineShopping/EditProductServlet?pId="+pId).forward(request, response);

@@ -9,6 +9,7 @@ import com.jets.onlineshopping.dto.CartItem;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,20 +36,13 @@ public class RemoveCartItem extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
+    
         HttpSession session = request.getSession(true);
-        ArrayList<CartItem> cartProducts = (ArrayList<CartItem>) session.getAttribute("products");
-        int x = cartProducts.size();
-        for(int i=0;i<cartProducts.size();i++){
-            if(cartProducts.get(i).getProduct().getId()==Integer.parseInt(request.getParameter("pId")))
-                cartProducts.remove(i);
-        }
-        /*
-        for (CartItem cartProduct : cartProducts) {
-            if (cartProduct.getProduct().getId() == Integer.parseInt(request.getParameter("pId"))){
-                cartProducts.remove(cartProduct);
-            }
-        }*/
+        HashMap<Integer, CartItem> cartItems = (HashMap<Integer, CartItem>) session.getAttribute("products");
+        int ProductId=Integer.parseInt(request.getParameter("pId"));
+        CartItem cartItem = cartItems.get(ProductId);
+        cartItems.remove(ProductId);
+       // session.setAttribute("products", cartItems);
         response.sendRedirect("cart.jsp");
     }
 

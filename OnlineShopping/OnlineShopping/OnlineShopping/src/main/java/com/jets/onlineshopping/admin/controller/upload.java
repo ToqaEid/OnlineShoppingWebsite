@@ -5,22 +5,29 @@
  */
 package com.jets.onlineshopping.admin.controller;
 
-import com.jets.onlineshopping.dao.DBHandler;
-import com.jets.onlineshopping.dto.Product;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
- * @author toqae
+ * @author Eslam
  */
-@WebServlet(name = "AddNewProductServlet", urlPatterns = {"/AddNewProductServlet"})
-public class AddNewProductServlet extends HttpServlet {
+@WebServlet(name = "upload", urlPatterns = {"/upload"})
+@MultipartConfig
+public class upload extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,29 +40,26 @@ public class AddNewProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = request.getParameter("url").equals("")?"default_image.jpg":request.getParameter("url");
-        System.out.println(url);
-        String name = request.getParameter("pName");
-        String cat = request.getParameter("pCategory");
-        float price = Float.parseFloat(request.getParameter("pPrice"));
-        int quantity = Integer.parseInt(request.getParameter("pQuantity"));
-        String desc = request.getParameter("pDescription");
-        if(desc == null){
-            desc="No Description";
+        try {
+            ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
+            List<FileItem> items = sf.parseRequest(request);
+
+            for (FileItem item : items) {
+                if (item != null) {
+                    System.out.println(item.getName());
+                    item.write(new File(request.getServletContext().getRealPath("")+"\\"+item.getName()));
+                    request.setAttribute("url", item.getName());
+                }
+            }
+
+            request.getRequestDispatcher("admin/add_product.jsp").forward(request, response);
+
+        } catch (FileUploadException ex) {
+            Logger.getLogger(upload.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(upload.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //request.getParameter("pURL");
-        
-        Product pro = new Product(price, quantity, name, desc, cat,url);
-        //Create DB handler object 
-        DBHandler db = new DBHandler();
-        //add product in db
-        if(db.insertProduct(pro)){
-            response.sendRedirect("/OnlineShopping");
-        }else{
-            request.setAttribute("errormsg", "Product is not inserted successfully" );
-            request.getRequestDispatcher("/admin/add_product.jsp").forward(request, response);
-            return;
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

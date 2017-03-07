@@ -62,8 +62,8 @@
                         </ul>
                         <div class="row">
                             <div id="gallery" class="span3">
-                                <a href="themes/images/products/large/f1.jpg" title="Fujifilm FinePix S2950 Digital Camera">
-                                    <img src="themes/images/products/large/3.jpg" style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
+                                <a href="${requestScope.product_details.url}" title="Fujifilm FinePix S2950 Digital Camera">
+                                    <img src="${requestScope.product_details.url}" style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
                                 </a>
                                 <div id="differentview" class="moreOptopm carousel slide">
 
@@ -110,7 +110,7 @@
                                                     <c:forEach items="${requestScope.related_products}" var="p">
                                                         <li class="span3">
                                                             <div class="thumbnail">
-                                                                <a href="product_details.html"><img src="themes/images/products/10.jpg" alt=""/></a>
+                                                                <a href="product_details.html"><img src="${p.url}" alt=""/></a>
                                                                 <div class="caption">
                                                                     <h5><c:out value="${p.name}"/></h5>
                                                                     <h4 style="text-align:center">
