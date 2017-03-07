@@ -1,11 +1,12 @@
 #mainBody {/* background: url(../images/seperator.png) repeat-x 0 0; */ border-top:2px solid #dedede; padding-top: 18px;}
 #carouselBlk,#header{background: url(../images/headerRepeat.png) repeat-x 0 0 #f7f7f7;}
-.tag {background:url(../images/new.png) no-repeat 0 0; position: absolute; display:block; top: -4px;right: -18px; height:48px; width:48px;}
+.tag {background:url(../images/new.png) no-repeat 0 0; position: absolute; display:block; top: -4px;right: -18px; height:48px; width:48px;} 
 .clr{clear:both;}
 .cntr{text-align:center}
 .marginLess{margin:0}
 #logoArea, #logoArea a{line-height:49px;}
 #logoArea .btn, #logoArea .btn-group {margin-top: 0;}
+.brand img{ width:10px; height:10px;}
 #logo {padding-right:28px;}
 #welcomeLine{padding: 8px 0 4px}
 /* Sidebar--------- */
@@ -62,9 +63,10 @@
 #lightbox-container-image-data #lightbox-image-details {width: 70%; float: left; text-align: left; }	
 #lightbox-image-details-caption { font-weight: bold; }#lightbox-image-details-currentNumber {display: block; clear: left; padding-bottom: 1.0em;}
 #lightbox-secNav-btnClose {width: 66px; float: right;padding-bottom: 0.7em;	}
-/* ------------------------------- */
+/*Nav Bar ------------------------------- */
+
 .navbar-search .srchTxt {
-	border-radius: 0;border: 1px solid #444;
+	border-radius: 5;border: 1px solid #444;
 	margin-left: 0;
 	float: left;
 	margin-top: 1%;
@@ -87,6 +89,7 @@
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
 .navbar .brand {float: none;text-align: center;}
+
 #sideManu,#topMenu{height:0}
 .navbar-search {margin-top: 8px;width: 100%;float: none;}
 #topMenu{height: auto;float: none;}

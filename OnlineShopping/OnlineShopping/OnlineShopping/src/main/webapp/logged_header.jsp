@@ -22,7 +22,7 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="home.html"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
+                        <a class="brand" href="home.html"><img src="themes/images/cartmagic_logo.png" alt="Bootsshop"/></a>
                         <form class="form-inline navbar-search" method="post" action="SearchServlet" >
                             <input name="searchText" id="srchFld" class="srchTxt" type="text" />
                             <select name="searchCategory" class="srchTxt">
