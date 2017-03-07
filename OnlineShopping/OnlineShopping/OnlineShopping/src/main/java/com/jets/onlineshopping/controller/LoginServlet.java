@@ -44,8 +44,7 @@ public class LoginServlet extends HttpServlet {
         if (refererUri != null) {
             String userEmail = request.getParameter("email");
             User user = db.checkLogin(userEmail, request.getParameter("password"));
-            System.out.println(user == null);
-            if (user != null) {
+            if (user != null && !user.getRole().equals(User.getROLE_ADMIN())) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("logged", user);
 
@@ -56,17 +55,11 @@ public class LoginServlet extends HttpServlet {
                 }
                 session.setAttribute("products", cartItemsOnSession);
                 db.deleteAllCartItems(userEmail);
-                
-                if(refererUri.equals("/login.jsp")){
-                    response.sendRedirect("HomeServlet");
-                }
-                else{
-                    request.getRequestDispatcher(request.getParameter("refererUri")).forward(request, response);
-                }
             } else {
                 // Wrong email or password
-                response.sendRedirect("HomeServlet");
+                request.setAttribute("login_failed", true);
             }
+            request.getRequestDispatcher(request.getParameter("refererUri")).forward(request, response);
         } else {
             response.sendRedirect("HomeServlet");
         }

@@ -88,6 +88,9 @@ public class BuyServlet extends HttpServlet {
                         db.decreaseCreditLimit(user.getEmail(), total);
                         //remove products from session 
                         session.removeAttribute("products");
+                        //decrease on session
+                        user.setCreditLimit(user.getCreditLimit() - total);
+                        session.setAttribute("logged", user);
                         //redirect to home page with success msg
                         request.setAttribute("success", "Order done successfully");
                         request.getRequestDispatcher("HomeServlet").forward(request, response);
@@ -95,7 +98,7 @@ public class BuyServlet extends HttpServlet {
                     } else {
                         //redirect to cart page again with error msg
                         errormsg += "out of stock";
-                        request.setAttribute("errormsg", errormsg);
+                        request.setAttribute("errorMsg", errormsg);
                         request.getRequestDispatcher("cart.jsp").forward(request, response);
                         return;
                     }
@@ -103,7 +106,7 @@ public class BuyServlet extends HttpServlet {
             }
         } else {  //user not logged in 
             session.setAttribute("errorMsg", "You must be logged in first before buying");
-            response.sendRedirect("LoginServlet");
+            request.getRequestDispatcher("HomeServlet").forward(request,response);
             return;
         }
     }

@@ -38,7 +38,7 @@
 		<ul id="sideManu" class="nav nav-tabs nav-stacked">
 			<li><a href="customer_profiles.html">CUSTOMER PROFILES</a></li>
                         <li><a href="/OnlineShopping/ViewCoupons">View Coupons</a></li>
-			<li><a href="/admin/add_product.jsp">NEW ARRIVAL</a></li>
+			<li><a href="/OnlineShopping/admin/add_product.jsp">NEW ARRIVAL</a></li>
 			<li class="subMenu"><a>FOOD AND BEVERAGES [1000]</a></li>
 			<li><a href="products.html">HEALTH & BEAUTY [18]</a></li>
 			<li><a href="products.html">SPORTS & LEISURE [58]</a></li>

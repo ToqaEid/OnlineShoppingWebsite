@@ -38,7 +38,7 @@ public class GenerateCoupons extends HttpServlet {
         int number=Integer.parseInt(request.getParameter("coupons_num"));
         boolean check = new DBHandler().insertCoupon(coupons_credit, number);
         System.out.println(check);
-        response.sendRedirect("/OnlineShopping/admin/home");
+        response.sendRedirect("/OnlineShopping/admin");
        
     }
 

@@ -179,4 +179,12 @@
         </div>
         <span id="themesBtn"></span>
     </body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var location = window.location.href;
+            if (location.indexOf("EditProfile") === -1) {
+                window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "EditProfile";
+            }
+        }
+    </script>
 </html>

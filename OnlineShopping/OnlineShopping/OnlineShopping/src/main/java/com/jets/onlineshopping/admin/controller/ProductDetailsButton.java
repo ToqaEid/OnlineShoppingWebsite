@@ -61,7 +61,7 @@ public class ProductDetailsButton extends HttpServlet {
         }
         request.setAttribute("related_products", relatedProducts);
         //go to jsp page 
-        RequestDispatcher rd = request.getRequestDispatcher("product_details.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/admin/product_details.jsp");
         rd.forward(request, response);
         return;       
     }

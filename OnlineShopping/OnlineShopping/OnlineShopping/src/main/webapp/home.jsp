@@ -62,6 +62,18 @@
                     <jsp:include page="sidebar.jsp"/>
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
+                        <c:if test="${!empty requestScope.errorMsg}">
+                            <div class="alert alert-block alert-error fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <c:out value="${requestScope.errorMsg}"/>
+                            </div>
+                        </c:if>
+                        <c:if test="${!empty requestScope.success}">
+                            <div class="alert alert-block alert-success fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <c:out value="${requestScope.success}"/>
+                            </div>
+                        </c:if>
                         <h4>Category Products </h4>
                         <ul class="thumbnails">
                             <c:forEach items="${requestScope.homeProducts}" var="product">
@@ -213,4 +225,12 @@
         </div>
         <span id="themesBtn"></span>
     </body>
+      <script type="text/javascript">
+        $(document).ready(function () {
+            var location = window.location.href;
+            if (location.indexOf("HomeServlet") === -1) {
+                window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "HomeServlet";
+            } 
+        });
+    </script>
 </html>

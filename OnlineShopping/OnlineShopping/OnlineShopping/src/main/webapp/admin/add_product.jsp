@@ -1,4 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:if test="${empty requestScope.url}">
+    <c:set var="url" value="${pageContext.request.contextPath}/default_image.jpg"/>
+</c:if>
+<c:if test="${!empty requestScope.url}">
+    <c:set var="url" value="${requestScope.url}"/>
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,63 +40,7 @@
         <style type="text/css" id="enject"></style>
     </head>
     <body>
-        <div id="header">
-
-            <!-- Navbar ================================================== -->
-            <div id="logoArea" class="navbar">
-                <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="navbar-inner">
-                    <a class="brand" href="index.html"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
-                    <form class="form-inline navbar-search" method="post" action="products.html" >
-                        <input id="srchFld" class="srchTxt" type="text" />
-                        <select class="srchTxt">
-                            <option>All</option>
-                            <option>CLOTHES </option>
-                            <option>FOOD AND BEVERAGES </option>
-                            <option>HEALTH & BEAUTY </option>
-                            <option>SPORTS & LEISURE </option>
-                            <option>BOOKS & ENTERTAINMENTS </option>
-                        </select> 
-                        <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-                    </form>
-                    <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="special_offer.html">Specials Offer</a></li>
-                        <li class=""><a href="normal.html">Delivery</a></li>
-                        <li class=""><a href="contact.html">Contact</a></li>
-                        <li class="">
-                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã</button>
-                                    <h3>Login Block</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
-                                        <div class="control-group">								
-                                            <input type="text" id="inputEmail" placeholder="Email">
-                                        </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-                                                <input type="checkbox"> Remember me
-                                            </label>
-                                        </div>
-                                    </form>		
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <jsp:include page="/admin/adminHeader.jsp"/>
     </div>
     <!-- Header End====================================================================== -->
     <div id="mainBody">
@@ -103,14 +54,18 @@
                     </ul>	
                     <div class="row">	  
                         <div id="gallery" class="span3">
-                            <a href="themes/images/products/large/f1.jpg" title="Fujifilm FinePix S2950 Digital Camera">
-                                <img src="themes/images/products/large/3.jpg" style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
+                            <a href="${url}" title="">
+                                <img src="${url}" style="width:100%" alt=""/>
                             </a>
+                            <form method="post" action="/OnlineShopping/upload" enctype="multipart/form-data">
+                                <input name="file" type="file" accept="image/*"/>
+                                <button type="submit" value="View Image">Upload Image</button>
+                            </form>
                         </div>
                         <div class="span6">
                             <form action="/OnlineShopping/AddNewProductServlet" method="get" id="addform">
-
-                                <h3><input type="text" name="pName" placeholder="Product Name" pattern="[a-zA-Z]+.*" oninvalid="setCustomValidity('Name should start with letter')" required></h3>
+                                <input type="hidden" name="url" value="${requestScope.url}"
+                                <h3><input type="text" name="pName" placeholder="Product Name" required></h3>
                                 <hr class="soft"/>
                                 <div>
                                     <label for="">Category</label>
@@ -125,9 +80,9 @@
                                     <hr>
                                 </div>
                                 <div class="control-group">
-                                    <span><input type="text" name="pPrice" placeholder="Price" style="width:10%; " pattern="[0-9]*" oninvalid="setCustomValidity('Price should contains real or decimal numbers only')" required></span>
+                                    <span><input type="text" name="pPrice" placeholder="Price" style="width:10%; " required></span>
                                     <span>
-                                        <input class="quantity" type="text" name="pQuantity" placeholder="Quantity" style="width:10%; margin-left:25%;" pattern="[0-9]*" oninvalid="setCustomValidity('Price should contains real or decimal numbers only')" required></span>
+                                        <input class="quantity" type="text" name="pQuantity" placeholder="Quantity" style="width:10%; margin-left:25%;" required></span>
                                     <button type="submit" class="btn btn-large btn-primary pull-right"> Add </button>
                                 </div>
                         </div>
@@ -164,43 +119,7 @@
     </div>
     <!-- MainBody End ============================= -->
     <!-- Footer ================================================================== -->
-    <div  id="footerSection">
-        <div class="container">
-            <div class="row">
-                <div class="span3">
-                    <h5>ACCOUNT</h5>
-                    <a href="login.html">YOUR ACCOUNT</a>
-                    <a href="login.html">PERSONAL INFORMATION</a> 
-                    <a href="login.html">ADDRESSES</a> 
-                    <a href="login.html">DISCOUNT</a>  
-                    <a href="login.html">ORDER HISTORY</a>
-                </div>
-                <div class="span3">
-                    <h5>INFORMATION</h5>
-                    <a href="contact.html">CONTACT</a>  
-                    <a href="register.html">REGISTRATION</a>  
-                    <a href="legal_notice.html">LEGAL NOTICE</a>  
-                    <a href="tac.html">TERMS AND CONDITIONS</a> 
-                    <a href="faq.html">FAQ</a>
-                </div>
-                <div class="span3">
-                    <h5>OUR OFFERS</h5>
-                    <a href="#">NEW PRODUCTS</a> 
-                    <a href="#">TOP SELLERS</a>  
-                    <a href="special_offer.html">SPECIAL OFFERS</a>  
-                    <a href="#">MANUFACTURERS</a> 
-                    <a href="#">SUPPLIERS</a> 
-                </div>
-                <div id="socialMedia" class="span3 pull-right">
-                    <h5>SOCIAL MEDIA </h5>
-                    <a href="#"><img width="60" height="60" src="themes/images/facebook.png" title="facebook" alt="facebook"/></a>
-                    <a href="#"><img width="60" height="60" src="themes/images/twitter.png" title="twitter" alt="twitter"/></a>
-                    <a href="#"><img width="60" height="60" src="themes/images/youtube.png" title="youtube" alt="youtube"/></a>
-                </div> 
-            </div>
-            <p class="pull-right">&copy; Bootshop</p>
-        </div><!-- Container End -->
-    </div>
+    <jsp:include page="/admin/adminFooter.jsp"/>
     <!-- Placed at the end of the document so the pages load faster ============================================= -->
     <script src="themes/js/jquery.js" type="text/javascript"></script>
     <script src="themes/js/bootstrap.min.js" type="text/javascript"></script>

@@ -20,7 +20,7 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" style="width:10%; height:10%;" href="home.html"><img src="themes/images/cartmagic_logo.png" style="width:10%; height:10%;" alt="Bootsshop"/></a>
+                        <a class="brand" href="home.html"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
                         <form class="form-inline navbar-search" method="post" action="SearchServlet" >
                             <input name="searchText" id="srchFld" class="srchTxt" type="text" />
                             <select name="searchCategory" class="srchTxt">
@@ -49,16 +49,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <form action="login" method="POST" class="form-horizontal loginFrm">
+                                            <div id="login_failed" class="alert alert-block alert-error fade in" style="margin: 0px 14px; width: 180px; display: none ">
+                                                Incorrect email or password.
+                                            </div>
                                             <div class="control-group">								
-                                                <input type="text" name="email" id="inputEmail" placeholder="Email">
+                                                <input type="text" name="email" id="inputEmail" placeholder="Email" required="true">
                                             </div>
                                             <div class="control-group">
-                                                <input type="password" name="password" id="inputPassword" placeholder="Password">
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="checkbox">
-                                                    <input type="checkbox"> Remember me
-                                                </label>
+                                                <input type="password" name="password" id="inputPassword" placeholder="Password" required="true">
                                             </div>
                                             <input type="hidden" name="refererUri" value="${pageContext.request.servletPath}"/>
                                             <button type="submit" class="btn btn-success">Sign in</button>
@@ -75,6 +73,33 @@
             </div>
         </div>
         <!-- Header End====================================================================== -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var showLogin = function () {
+                    $(login).modal("show");
+                };
 
+            <c:if test="${!empty requestScope.login_failed}">
+                // Show Login block
+                showLogin();
+                // Show error alert in Login block
+                $(login_failed).show();
+            </c:if>
+
+                $(login_form).submit(function () {
+                    try {
+                        validateEmail($(input_email).val());
+                    } catch (ex) {
+                        $(login_failed).html("Inalid email.");
+                        $(login_failed).show();
+                        return false;
+                    }
+                });
+
+                $(btn_login).click(function () {
+                    $(login_failed).hide();
+                });
+            });
+        </script>
     </body>
 </html>

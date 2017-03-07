@@ -7,13 +7,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<c:set var="total" value="0"/>
+<c:forEach items="${sessionScope.products}" var="item">
+    <c:set var="total" value="${total+item.value.quantity}"/>
+</c:forEach>
 <!DOCTYPE html>
 <html>
     <body>
         <div id="sidebar" class="span3">
             <div class="well well-small"><a id="myCart" href="cart.jsp"><img src="themes/images/ico-cart.png" alt="cart">
                     <c:if test="${!empty sessionScope.products}">
-                        <c:out value="${fn:length(sessionScope.products)}"/>
+                        <c:out value="${total}"/>
                     </c:if>
 
                     <c:if test="${empty sessionScope.products}">

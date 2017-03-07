@@ -35,7 +35,7 @@ public class RemoveProductButtonServlet extends HttpServlet {
         int pId= Integer.parseInt(request.getParameter("pId"));
         DBHandler db = new DBHandler();
         db.deleteProduct(pId);
-        response.sendRedirect("/OnlineShopping/admin/home");
+        response.sendRedirect("/OnlineShopping/admin");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

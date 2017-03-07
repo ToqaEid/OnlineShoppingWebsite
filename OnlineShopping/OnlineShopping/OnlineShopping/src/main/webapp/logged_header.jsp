@@ -4,8 +4,6 @@
     Author     : toqae
 --%>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,13 +20,13 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="home.html"><img src="themes/images/cartmagic_logo.png" alt="Bootsshop"/></a>
-                        <form class="form-inline navbar-search" method="post" action="SearchServlet" >
-                            <input name="searchText" id="srchFld" class="srchTxt" type="text" />
-                            <select name="searchCategory" class="srchTxt">
+                        <a class="brand" href="home.html"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
+                        <form class="form-inline navbar-search" method="post" action="products.html" >
+                            <input id="srchFld" class="srchTxt" type="text" />
+                            <select class="srchTxt">
                                 <option>All</option>
-                                <option>mobiles</option>
-                                <option>Laptops</option>
+                                <option>CLOTHES </option>
+                                <option>FOOD AND BEVERAGES </option>
                                 <option>HEALTH & BEAUTY </option>
                                 <option>SPORTS & LEISURE </option>
                                 <option>BOOKS & ENTERTAINMENTS </option>
@@ -38,8 +36,23 @@
                         <ul id="topMenu" class="nav pull-right">
                             <li class=""><a href="contact.html">Contact-Us</a></li>
                             <li class=""><a href="edit_profile.jsp">Edit-Profile</a></li>
-                            <li class="">
-                          
+                           <a href="#coupon" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Enter Coupon</span></a>
+                                <div id="coupon" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3>Coupon Code</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="EnterCoupon" method="POST" class="form-horizontal loginFrm">
+                                            <div class="control-group">								
+                                                <input type="text" name="couponCode" id="coupon" >
+                                            </div>
+                                            <input type="hidden" name="refererUri" value="${pageContext.request.servletPath}"/>
+                                            <button type="submit" class="btn btn-success">Enter</button>
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                        </form>
+                                    </div>
+                                </div>
                             <li class=""><a href="SignOutServlet">SignOut</a></li>
                             </li>
                         </ul>

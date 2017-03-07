@@ -514,4 +514,31 @@ public class DBHandler {
         return coupons;
     }
 //    end of Eslam
+     ////////////////////Roma////////////////////
+     public Coupon getCoupon(long code) {
+         Coupon coupon = null;
+        try {
+            preparedStatement = (PreparedStatement) connection.prepareStatement("SELECT * FROM coupon where id=?");
+            preparedStatement.setLong(1, code);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                coupon=new Coupon(rs.getLong("id"),  rs.getInt("credit"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return coupon;
+    }
+     
+      public void removeCoupon(long id) {
+        try {
+            preparedStatement = (PreparedStatement) connection.prepareStatement("DELETE FROM coupon WHERE id = ?");
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+      
+      ////////////////End Roma/////////////////////////////////
 }

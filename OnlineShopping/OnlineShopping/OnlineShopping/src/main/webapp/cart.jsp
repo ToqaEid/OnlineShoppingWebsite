@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : cart
     Created on : 01-Mar-2017, 09:15:58
     Author     : toqae
@@ -28,13 +28,13 @@
         <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
         <script src="themes/js/less.js" type="text/javascript"></script> -->
 
-        <!-- Bootstrap style --> 
+        <!-- Bootstrap style -->
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
         <link href="themes/css/base.css" rel="stylesheet" media="screen"/>
-        <!-- Bootstrap style responsive -->	
+        <!-- Bootstrap style responsive -->
         <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet"/>
         <link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
-        <!-- Google-code-prettify -->	
+        <!-- Google-code-prettify -->
         <link href="themes/js/google-code-prettify/prettify.css" rel="stylesheet"/>
         <!-- fav and touch icons -->
         <link rel="shortcut icon" href="themes/images/ico/favicon.ico">
@@ -45,67 +45,15 @@
         <style type="text/css" id="enject"></style>
     </head>
     <body>
-        <div id="header">
-            <div class="container">
-                <div id="welcomeLine" class="row">
-                    <div class="span6">Welcome!<strong> User</strong></div>
-                </div>
-                <!-- Navbar ================================================== -->
-                <div id="logoArea" class="navbar">
-                    <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <div class="navbar-inner">
-                        <a class="brand" href="HomeServlet"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
-                        <form class="form-inline navbar-search" method="post" action="products.html" >
-                            <input id="srchFld" class="srchTxt" type="text" />
-                            <select class="srchTxt">
-                                <option>All</option>
-                                <option>CLOTHES </option>
-                                <option>FOOD AND BEVERAGES </option>
-                                <option>HEALTH & BEAUTY </option>
-                                <option>SPORTS & LEISURE </option>
-                                <option>BOOKS & ENTERTAINMENTS </option>
-                            </select> 
-                            <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-                        </form>
-                        <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="special_offer.html">Specials Offer</a></li>
-                            <li class=""><a href="normal.html">Delivery</a></li>
-                            <li class=""><a href="contact.html">Contact</a></li>
-                            <li class="">
-                                <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                                <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
-                                        <h3>Login Block</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form-horizontal loginFrm">
-                                            <div class="control-group">								
-                                                <input type="text" id="inputEmail" placeholder="Email">
-                                            </div>
-                                            <div class="control-group">
-                                                <input type="password" id="inputPassword" placeholder="Password">
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="checkbox">
-                                                    <input type="checkbox"> Remember me
-                                                </label>
-                                            </div>
-                                        </form>		
-                                        <button type="submit" class="btn btn-success">Sign in</button>
-                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <c:if test="${empty sessionScope.logged}">
+            <jsp:include page="not_logged_header.jsp"/>
+        </c:if>
+
+        <c:if test="${!empty sessionScope.logged}">
+            <jsp:include page="logged_header.jsp"/>
+        </c:if>
+
+
         <!-- Header End====================================================================== -->
         <div id="mainBody">
             <div class="container">
@@ -116,8 +64,14 @@
                             <li><a href="HomeServlet">Home</a> <span class="divider">/</span></li>
                             <li class="active"> SHOPPING CART</li>
                         </ul>
-                        <h3>  SHOPPING CART [ <small><c:out value="${fn:length(sessionScope.products)}"/> Item(s) </small>]</h3>	
-                        <hr class="soft"/>	
+                        <c:if test="${!empty requestScope.errorMsg}">
+                        <div class="alert alert-block alert-error fade in">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <c:out value="${requestScope.errorMsg}"/>
+                        </div>
+                        </c:if>
+                        <h3>  SHOPPING CART [ <small><c:out value="${fn:length(sessionScope.products)}"/> Item(s) </small>]</h3>
+                        <hr class="soft"/>
 
                         <table class="table table-bordered">
                             <thead>
@@ -132,28 +86,28 @@
 
                             <tbody>
 
-                                <c:set var="count" value="${0}" /> 
+                                <c:set var="count" value="${0}" />
 
                                 <c:forEach items="${sessionScope.products}" var="item">
-                                <form action="RemoveCartItem" method="post">
+                                <%-- <form action="RemoveCartItem" method="post"> --%>
                                     <tr>
-                                        <td> <img width="60" src="themes/images/products/4.jpg" alt=""/></td>
+                                        <td> <img width="60" src="${item.value.product.url}" alt=""/></td>
                                         <td><c:out value="${item.value.product.name}"/><br/>
                                             <c:out value="${item.value.product.description}"/></td>
                                         <td>
                                             <div class="input-append">
                                                 <input class="span1" style="max-width:34px" placeholder="${item.value.quantity}" id="appendedInputButtons" size="16" type="text">
-                                                <button class="btn"> <a href="DecreaseCartItem?pId=${item.key}" class="icon-minus"></a></button>
-                                                <button class="btn"> <a href="IncreaseCartItem?pId=${item.key}" class="icon-plus"></a></button>
-                                                <button class="btn"> <a href="RemoveCartItem?pId=${item.key}" class="icon-remove icon-white"></a></button>                                <input type="hidden" name="pId" value="${item.key}"/>
+                                                  <button class="btn"> <a href="DecreaseCartItem?pId=${item.key}" class="icon-minus"></a></button>
+                                                  <button class="btn"> <a href="IncreaseCartItem?pId=${item.key}" class="icon-plus"></a></button>
+                                                  <button class="btn"> <a href="RemoveCartItem?pId=${item.key}" class="icon-remove icon-white"></a></button>
                                             </div>
                                         </td>
-                                        <td><c:out value="${item.value.product.price}"/></td>          
+                                        <td><c:out value="${item.value.product.price}"/></td>
 
                                         <c:set var="count" value="${count+item.value.quantity*item.value.product.price}" scope="page"/>
                                     </tr>
-                                </form>
-                            </c:forEach> 
+                                <%-- </form> --%>
+                            </c:forEach>
 
                             <tr>
                                 <td colspan="4" style="text-align:right"><strong>TOTAL =</strong>  </td>
@@ -176,33 +130,33 @@
                     <div class="span3">
                         <h5>ACCOUNT</h5>
                         <a href="login.html">YOUR ACCOUNT</a>
-                        <a href="login.html">PERSONAL INFORMATION</a> 
-                        <a href="login.html">ADDRESSES</a> 
-                        <a href="login.html">DISCOUNT</a>  
+                        <a href="login.html">PERSONAL INFORMATION</a>
+                        <a href="login.html">ADDRESSES</a>
+                        <a href="login.html">DISCOUNT</a>
                         <a href="login.html">ORDER HISTORY</a>
                     </div>
                     <div class="span3">
                         <h5>INFORMATION</h5>
-                        <a href="contact.html">CONTACT</a>  
-                        <a href="register.html">REGISTRATION</a>  
-                        <a href="legal_notice.html">LEGAL NOTICE</a>  
-                        <a href="tac.html">TERMS AND CONDITIONS</a> 
+                        <a href="contact.html">CONTACT</a>
+                        <a href="register.html">REGISTRATION</a>
+                        <a href="legal_notice.html">LEGAL NOTICE</a>
+                        <a href="tac.html">TERMS AND CONDITIONS</a>
                         <a href="faq.html">FAQ</a>
                     </div>
                     <div class="span3">
                         <h5>OUR OFFERS</h5>
-                        <a href="#">NEW PRODUCTS</a> 
-                        <a href="#">TOP SELLERS</a>  
-                        <a href="special_offer.html">SPECIAL OFFERS</a>  
-                        <a href="#">MANUFACTURERS</a> 
-                        <a href="#">SUPPLIERS</a> 
+                        <a href="#">NEW PRODUCTS</a>
+                        <a href="#">TOP SELLERS</a>
+                        <a href="special_offer.html">SPECIAL OFFERS</a>
+                        <a href="#">MANUFACTURERS</a>
+                        <a href="#">SUPPLIERS</a>
                     </div>
                     <div id="socialMedia" class="span3 pull-right">
                         <h5>SOCIAL MEDIA </h5>
                         <a href="#"><img width="60" height="60" src="themes/images/facebook.png" title="facebook" alt="facebook"/></a>
                         <a href="#"><img width="60" height="60" src="themes/images/twitter.png" title="twitter" alt="twitter"/></a>
                         <a href="#"><img width="60" height="60" src="themes/images/youtube.png" title="youtube" alt="youtube"/></a>
-                    </div> 
+                    </div>
                 </div>
                 <p class="pull-right">&copy; Bootshop</p>
             </div><!-- Container End -->
@@ -234,7 +188,7 @@
                     <a href="themes/css/#" name="cyborg"><img src="themes/switch/images/clr/cyborg.png" alt="bootstrap business templates"></a>
                     <a href="themes/css/#" name="cerulean"><img src="themes/switch/images/clr/cerulean.png" alt="bootstrap business templates"></a>
                     <a href="themes/css/#" name="journal"><img src="themes/switch/images/clr/journal.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="readable"><img src="themes/switch/images/clr/readable.png" alt="bootstrap business templates"></a>	
+                    <a href="themes/css/#" name="readable"><img src="themes/switch/images/clr/readable.png" alt="bootstrap business templates"></a>
                     <a href="themes/css/#" name="simplex"><img src="themes/switch/images/clr/simplex.png" alt="bootstrap business templates"></a>
                     <a href="themes/css/#" name="slate"><img src="themes/switch/images/clr/slate.png" alt="bootstrap business templates"></a>
                     <a href="themes/css/#" name="spacelab"><img src="themes/switch/images/clr/spacelab.png" alt="bootstrap business templates"></a>
@@ -271,4 +225,12 @@
         </div>
         <span id="themesBtn"></span>
     </body>
+     <script type="text/javascript">
+        $(document).ready(function () {
+            var location = window.location.href;
+            if (location.indexOf("cart.jsp") === -1) {
+                window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "cart.jsp";
+            }
+        }
+    </script>
 </html>

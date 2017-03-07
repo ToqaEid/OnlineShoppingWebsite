@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Eslam
  */
-@WebServlet(urlPatterns = {"/admin/home"})
+@WebServlet(urlPatterns = {"/admin"})
 public class adminHome extends HttpServlet {
 
     /**
@@ -58,7 +58,7 @@ public class adminHome extends HttpServlet {
         }
 
         request.setAttribute("homeProducts", homeProducts);
-        request.getRequestDispatcher("products.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin/products.jsp").forward(request, response);
 
     }
 
