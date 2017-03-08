@@ -20,6 +20,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
+        
+        <script src="themes/js/jquery.js" type="text/javascript"></script> 
+        <script src="bootstrap/js/script.js"></script>
+        
         <!-- Bootstrap style --> 
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
         <link href="themes/css/base.css" rel="stylesheet" media="screen"/>
@@ -72,13 +76,13 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputFname">Name <sup>*</sup></label>
                                     <div class="controls">
-                                        <input type="text" name="name" id="inputFname" value="${logged.name}" required="true"/>
+                                        <input type="text" name="name" id="inputFname" value="${logged.name}" maxlength="20" required="true"/>
                                     </div>
                                 </div>	  
                                 <div class="control-group">
                                     <label class="control-label" for="inputPassword1">Password <sup>*</sup></label>
                                     <div class="controls">
-                                        <input type="password" name="password" id="inputPassword1" value="${logged.password}" required="true"/>
+                                        <input type="password" name="password" id="inputPassword1" value="${logged.password}" maxlength="20" required="true"/>
                                     </div>
                                 </div>	  
                                 <div class="control-group">
@@ -90,13 +94,13 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputJob">Job </label>
                                     <div class="controls">
-                                        <input type="text" name="job" id="inputJob" value="${logged.job}"/>
+                                        <input type="text" name="job" id="inputJob" value="${logged.job}" maxlength="20"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label" for="address">Address</label>
                                     <div class="controls">
-                                        <input type="text" name="address" id="address" value="${logged.address}"/> 
+                                        <input type="text" name="address" id="address" value="${logged.address}" maxlength="20"/> 
                                     </div>
                                 </div>
                                 <p><sup>*</sup>Required field</p>
@@ -178,13 +182,16 @@
             </div>
         </div>
         <span id="themesBtn"></span>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(login).on('hidden', function () {
+                    $(login_failed).hide();
+                    var location = window.location.href;
+                    if (location.indexOf("EditProfile") === -1) {
+                        window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "EditProfile";  
+                    } 
+                });
+            });
+        </script>
     </body>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var location = window.location.href;
-            if (location.indexOf("EditProfile") === -1) {
-                window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "EditProfile";
-            }
-        }
-    </script>
 </html>

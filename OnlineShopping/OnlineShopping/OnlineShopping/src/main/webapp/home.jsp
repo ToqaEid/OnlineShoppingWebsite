@@ -27,7 +27,8 @@
              <link rel="stylesheet/less" type="text/css" href="themes/less/amelia.less">  MOVE DOWN TO activate
         -->
         <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
-        <script src="themes/js/less.js" type="text/javascript"></script> -->
+-->     <script src="themes/js/jquery.js" type="text/javascript"></script> 
+        <script src="bootstrap/js/script.js"></script>
 
         <!-- Bootstrap style -->
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
@@ -224,13 +225,26 @@
             </div>
         </div>
         <span id="themesBtn"></span>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var location = window.location.href;
+                if (location.indexOf("SignOutServlet") !== -1) {
+                    window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "HomeServlet";  
+                } 
+
+                $(login).on('hidden', function () {
+                    $(login_failed).hide();
+                    var location = window.location.href;
+                    if (location.indexOf("HomeServlet") === -1) {
+                        window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "HomeServlet";  
+                    } 
+                });
+                
+                $('.btn').click(function() {
+                    <c:set var="product_id" scope="session" />
+                    $('#${product_id}') = $(this).attr("href").split('=')[1];
+                });
+            });
+        </script>
     </body>
-      <script type="text/javascript">
-        $(document).ready(function () {
-            var location = window.location.href;
-            if (location.indexOf("HomeServlet") === -1) {
-                window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "HomeServlet";
-            } 
-        });
-    </script>
 </html>

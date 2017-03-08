@@ -18,7 +18,9 @@
         <script src="themes/js/less.js" type="text/javascript"></script> -->
 
         <!-- Bootstrap style --> 
-        <script src="bootstrap/js/script.js"></script>
+        <script src="themes/js/jquery.js" type="text/javascript"></script> 
+        <script src="/OnlineShopping/bootstrap/js/script.js"></script>
+        
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
         <link href="admin/themes/css/base.css" rel="stylesheet" media="screen"/>
         <!-- Bootstrap style responsive -->	

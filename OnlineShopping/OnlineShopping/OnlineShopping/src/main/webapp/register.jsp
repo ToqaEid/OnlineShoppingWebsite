@@ -14,7 +14,8 @@
              <link rel="stylesheet/less" type="text/css" href="themes/less/amelia.less">  MOVE DOWN TO activate
         -->
         <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
--->     <script src="bootstrap/js/script.js"></script>
+-->     <script src="themes/js/jquery.js" type="text/javascript"></script> 
+        <script src="bootstrap/js/script.js"></script>
 
         <!-- Bootstrap style --> 
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>

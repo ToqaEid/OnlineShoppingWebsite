@@ -25,6 +25,9 @@
         <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
         <script src="themes/js/less.js" type="text/javascript"></script> -->
 
+        <script src="themes/js/jquery.js" type="text/javascript"></script> 
+        <script src="bootstrap/js/script.js"></script>
+        
         <!-- Bootstrap style -->
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
         <link href="themes/css/base.css" rel="stylesheet" media="screen"/>
@@ -202,13 +205,18 @@
             </div>
         </div>
         <span id="themesBtn"></span>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(login).on('hidden', function () {
+                    $(login_failed).hide();
+                    var location = window.location.href;
+                    var originLocation = "ProductDetails?pId=";
+                    originLocation.concat(${sessionScope.product_id});
+                    if (location.indexOf(originLocation) === -1) {
+                        window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + originLocation;  
+                    } 
+                });
+            });
+        </script>
     </body>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var location = window.location.href;
-            if (location.indexOf("ProductDetails") === -1) {
-                window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "ProductDetails";
-            }
-        }
-    </script>
 </html>
