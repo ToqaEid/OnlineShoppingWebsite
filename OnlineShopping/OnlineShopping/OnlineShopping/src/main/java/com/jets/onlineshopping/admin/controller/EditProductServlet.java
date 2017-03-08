@@ -7,6 +7,7 @@ package com.jets.onlineshopping.admin.controller;
 
 import com.jets.onlineshopping.dao.DBHandler;
 import com.jets.onlineshopping.dto.Product;
+import com.jets.onlineshopping.dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,10 +35,18 @@ public class EditProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("admin_logged");
+        System.out.println(user);
+        if (user == null) {    //user not logged in 
+            request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
+            return;
+            //response.sendRedirect("/admin/login.jsp");
+        }
         //get product id from request
         int pId = Integer.parseInt(request.getParameter("pId"));
         if(pId == 0){
-            response.sendRedirect("admin/products.jsp");
+            response.sendRedirect("/admin/products.jsp");
         }
         //get whole product from db 
         DBHandler db = new DBHandler();
@@ -46,7 +56,9 @@ public class EditProductServlet extends HttpServlet {
             request.getRequestDispatcher("/admin/edit_product.jsp").forward(request, response);
             return;
         }else{
-            response.sendRedirect("admin/products.jsp");
+            request.setAttribute("errorMsg", "No Such Product");
+            request.getRequestDispatcher("admin").forward(request, response);
+            return;
         }
         
         

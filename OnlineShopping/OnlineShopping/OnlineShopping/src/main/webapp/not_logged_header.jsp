@@ -17,7 +17,7 @@
                 <span class="icon-bar"></span>
             </a>
             <div class="navbar-inner">
-                <a class="brand" href="home.html"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
+                <a class="brand" href="HomeServlet"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
                 <form class="form-inline navbar-search" method="post" action="SearchServlet" >
                     <input name="searchText" id="srchFld" class="srchTxt" type="text" />
                     <select name="searchCategory" class="srchTxt">
@@ -31,7 +31,6 @@
                     <button type="submit" id="submitButton" class="btn btn-primary">Search</button>
                 </form>
                 <ul id="topMenu" class="nav pull-right">
-                    <li class=""><a href="contact.html">Contact-Us</a></li>
                     <li class="">
                         <!-- ================== Sign up =======================-->
                         <a href="register.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Sign up</span></a>

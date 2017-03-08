@@ -42,10 +42,14 @@ public class DecreaseCartItem extends HttpServlet {
         CartItem cartItem = cartItems.get(ProductId);
         if (cartItem.getQuantity() != 1) {
             cartItem.setQuantity(cartItem.getQuantity() - 1);
+//            request.setAttribute("success", "No enough quantity in stock for such operation.");
+        } else {
+            request.setAttribute("errorMsg", "You've reached minimum number.");
         }
         cartItems.put(ProductId, cartItem);
         // session.setAttribute("products", cartItems);
-        response.sendRedirect("cart.jsp");
+//        response.sendRedirect("cart.jsp");
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

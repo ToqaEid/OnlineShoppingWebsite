@@ -52,16 +52,26 @@ public class SignUpServlet extends HttpServlet {
 
                     String job = request.getParameter("job");
                     String address = request.getParameter("address");
-                    float creditLimit = Float.parseFloat(request.getParameter("credit_limit"));
+//                    float creditLimit = Float.parseFloat(request.getParameter("credit_limit"));
+                    float creditLimit = 2000;
 
                     User user = new User(email, name, password, birthdate, job, creditLimit, address, User.getROLE_USER());
                     db.insertUser(user);
 
                     HttpSession session = request.getSession(true);
                     session.setAttribute("logged", user);
-                    
+
                     refererUri = refererUri.substring(refererUri.lastIndexOf('/') + 1);
-                    request.getRequestDispatcher(refererUri).forward(request, response);
+
+                    if (refererUri.equals("") || refererUri == null) {
+                        request.setAttribute("success", "Welcome " + user.getName());
+                        request.getRequestDispatcher("HomeServlet").forward(request, response);
+                        return;
+                    }
+                    request.setAttribute("success", "Welcome " + user.getName());
+                    request.getRequestDispatcher("HomeServlet").forward(request, response);
+                    return;
+//                    request.getRequestDispatcher(refererUri).forward(request, response);
                 } else {
                     request.setAttribute("signup_failed", true);
                     String uri = request.getHeader("Referer");

@@ -44,6 +44,8 @@ public class LoginServlet extends HttpServlet {
             String userEmail = request.getParameter("email");
             User user = db.checkLogin(userEmail, request.getParameter("password"));
             if (user != null && !user.getRole().equals(User.getROLE_ADMIN())) {
+                HttpSession session1 = request.getSession(true);
+                session1.invalidate();
                 HttpSession session = request.getSession(true);
                 session.setAttribute("logged", user);
 
@@ -52,18 +54,25 @@ public class LoginServlet extends HttpServlet {
                 for (CartItem cartItem : cartItems) {
                     cartItemsOnSession.put(cartItem.getProduct().getId(), cartItem);
                 }
-                if(session.getAttribute("products")!=null){
+                if (session.getAttribute("products") != null) {
                     HashMap<Integer, CartItem> sessionProducts = (HashMap<Integer, CartItem>) session.getAttribute("products");
                     sessionProducts.putAll(cartItemsOnSession);
                     session.setAttribute("products", sessionProducts);
-                }else
-                    session.setAttribute("products", cartItemsOnSession);                
+                } else {
+                    session.setAttribute("products", cartItemsOnSession);
+                }
                 db.deleteAllCartItems(userEmail);
             } else {
                 // Wrong email or password
                 request.setAttribute("login_failed", true);
+//                request.setAttribute("errorMsg", "Email or password is incorrcet.");
+                request.getRequestDispatcher("HomeServlet").forward(request, response);
+                return;
             }
-            request.getRequestDispatcher(request.getParameter("refererUri")).forward(request, response);
+//            request.getRequestDispatcher(request.getParameter("refererUri")).forward(request, response);
+            request.setAttribute("success", "Welcome "+user.getName());
+            System.out.println(user);
+            request.getRequestDispatcher("HomeServlet").forward(request, response);
         } else {
             response.sendRedirect("HomeServlet");
         }

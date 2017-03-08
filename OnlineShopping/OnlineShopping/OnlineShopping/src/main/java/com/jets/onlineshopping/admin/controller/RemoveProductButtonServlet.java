@@ -6,6 +6,7 @@
 package com.jets.onlineshopping.admin.controller;
 
 import com.jets.onlineshopping.dao.DBHandler;
+import com.jets.onlineshopping.dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,10 +34,21 @@ public class RemoveProductButtonServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("admin_logged");
+        if (user == null) {    //user not logged in 
+            request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
+            return;
+        }
         int pId= Integer.parseInt(request.getParameter("pId"));
         DBHandler db = new DBHandler();
-        db.deleteProduct(pId);
-        response.sendRedirect("/OnlineShopping/admin");
+        if(db.deleteProduct(pId)){
+            request.setAttribute("success", "Product removed successfully");
+            request.getRequestDispatcher("admin").forward(request, response);
+        }else{
+            request.setAttribute("errormsg", "Product is not removed successfully");
+            request.getRequestDispatcher("admin").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

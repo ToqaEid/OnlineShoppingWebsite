@@ -42,6 +42,8 @@ public class LoginServlet extends HttpServlet {
         if (userEmail != null && password != null) {
             User user = db.checkLogin(userEmail, password);
             if (user != null && user.getRole().equals(User.getROLE_ADMIN())) {
+                HttpSession session1 = request.getSession(true);
+                session1.invalidate();
                 HttpSession session = request.getSession(true);
                 session.setAttribute("admin_logged", user);
                 uri = "products.jsp";
@@ -49,9 +51,10 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("login_failed", true);
                 uri = "login.jsp";
             }
-            request.getRequestDispatcher(uri).forward(request, response);
+//            request.getRequestDispatcher(uri).forward(request, response);
+            response.sendRedirect("/OnlineShopping/admin");
         } else {
-            response.sendRedirect("/OnlineShopping/admin/login.jsp");
+            response.sendRedirect("/OnlineShopping/admin");
         }
     }
 

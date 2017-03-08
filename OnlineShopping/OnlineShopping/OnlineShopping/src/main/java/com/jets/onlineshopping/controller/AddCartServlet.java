@@ -74,7 +74,9 @@ public class AddCartServlet extends HttpServlet {
         session.setAttribute("products", cartPro);
         //To redirect to same page
         String referer = request.getHeader("Referer");
-        response.sendRedirect(referer);
+//        response.sendRedirect(referer);
+        request.setAttribute("success", "Item has been added to your cart.");
+        request.getRequestDispatcher("HomeServlet").forward(request, response);
         //response.sendRedirect("home.jsp");  //Testing line
 }
 

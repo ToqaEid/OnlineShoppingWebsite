@@ -45,14 +45,18 @@ public class upload extends HttpServlet {
             List<FileItem> items = sf.parseRequest(request);
 
             for (FileItem item : items) {
-                if (item != null) {
+                if (item != null && !item.getName().equalsIgnoreCase("") && item.getContentType().contains("image")) {
                     System.out.println(item.getName());
-                    item.write(new File(request.getServletContext().getRealPath("")+"\\"+item.getName()));
+                    item.write(new File(request.getServletContext().getRealPath("") + "\\" + item.getName()));
                     request.setAttribute("url", item.getName());
+                    request.setAttribute("success", "Your image has been uploaded.");
+                    request.getRequestDispatcher("admin/add_product.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("url", "default_image.jpg");
+                    request.setAttribute("errorMsg", "Please choose a valid image.");
+                    request.getRequestDispatcher("admin/add_product.jsp").forward(request, response);
                 }
             }
-
-            request.getRequestDispatcher("admin/add_product.jsp").forward(request, response);
 
         } catch (FileUploadException ex) {
             Logger.getLogger(upload.class.getName()).log(Level.SEVERE, null, ex);
