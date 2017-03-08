@@ -105,7 +105,7 @@ public class BuyServlet extends HttpServlet {
                 }
             }
         } else {  //user not logged in 
-            session.setAttribute("errorMsg", "You must be logged in first before buying");
+            request.setAttribute("errorMsg", "You must be logged in first before buying");
             request.getRequestDispatcher("HomeServlet").forward(request,response);
             return;
         }

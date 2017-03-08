@@ -49,9 +49,10 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("login_failed", true);
                 uri = "login.jsp";
             }
-            request.getRequestDispatcher(uri).forward(request, response);
+//            request.getRequestDispatcher(uri).forward(request, response);
+            response.sendRedirect("/OnlineShopping/admin");
         } else {
-            response.sendRedirect("/OnlineShopping/admin/login.jsp");
+            response.sendRedirect("/OnlineShopping/admin");
         }
     }
 

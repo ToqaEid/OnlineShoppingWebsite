@@ -33,13 +33,19 @@ public class GenerateCoupons extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        int coupons_credit=Integer.parseInt(request.getParameter("coupons_credit"));
-        int number=Integer.parseInt(request.getParameter("coupons_num"));
+
+        int coupons_credit = Integer.parseInt(request.getParameter("coupons_credit"));
+        if (coupons_credit == 0) {
+            request.setAttribute("errorMsg","You can't create a coupon of 0 credit");
+            request.getRequestDispatcher("admin").forward(request, response);
+            return;
+        }
+        int number = Integer.parseInt(request.getParameter("coupons_num"));
         boolean check = new DBHandler().insertCoupon(coupons_credit, number);
         System.out.println(check);
-        response.sendRedirect("/OnlineShopping/admin");
-       
+        request.setAttribute("success", "Your coupons have been added.");
+        request.getRequestDispatcher("admin").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

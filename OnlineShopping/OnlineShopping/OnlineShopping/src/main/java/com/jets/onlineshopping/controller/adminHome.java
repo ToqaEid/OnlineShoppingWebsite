@@ -8,6 +8,7 @@ package com.jets.onlineshopping.controller;
 
 import com.jets.onlineshopping.dao.DBHandler;
 import com.jets.onlineshopping.dto.Product;
+import com.jets.onlineshopping.dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,6 +38,14 @@ public class adminHome extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ArrayList<Product> homeProducts;
+        
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("admin_logged");
+        if (user == null) {    //user not logged in 
+            request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
+            return;
+        }
+        
         if (request.getParameterMap().containsKey("category")) {
             String category = request.getParameter("category").toLowerCase();
             System.out.println(category);

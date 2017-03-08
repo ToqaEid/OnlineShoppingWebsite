@@ -20,10 +20,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        
+
         <script src="themes/js/jquery.js" type="text/javascript"></script> 
         <script src="bootstrap/js/script.js"></script>
-        
+
         <!-- Bootstrap style --> 
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
         <link href="themes/css/base.css" rel="stylesheet" media="screen"/>
@@ -48,19 +48,19 @@
         <div id="mainBody">
             <div class="container">
                 <div class="row">
-                  
-                     <c:if test="${empty sessionScope.logged}">
+
+                    <c:if test="${empty sessionScope.logged}">
                         <jsp:include page="not_logged_header.jsp"/>
                     </c:if>
 
                     <c:if test="${!empty sessionScope.logged}">
                         <jsp:include page="logged_header.jsp"/>
                     </c:if>
-                   
+
                     <!-- Sidebar ================================================== -->
                     <jsp:include page="sidebar.jsp"/>
                     <!-- Sidebar end=============================================== -->
-                     <div class="span9">
+                    <div class="span9">
                         <div class="well">
                             <form class="form-horizontal" action="EditProfile" method="POST">
                                 <h4>Your personal information</h4>
@@ -104,94 +104,40 @@
                                     </div>
                                 </div>
                                 <p><sup>*</sup>Required field</p>
-                                </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <input class="btn btn-large btn-success" type="submit" value="Edit">
-                                    </div>
-                                </div>		
-                            </form>
                         </div>
-
+                        <div class="control-group">
+                            <div class="controls">
+                                <input class="btn btn-large btn-success" type="submit" value="Edit">
+                            </div>
+                        </div>		
+                        </form>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer ================================================================== -->
-        <jsp:include page="footer.jsp"/>
-        <!-- Placed at the end of the document so the pages load faster ============================================= -->
-        <script src="themes/js/jquery.js" type="text/javascript"></script>
-        <script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="themes/js/google-code-prettify/prettify.js"></script>
-
-        <script src="themes/js/bootshop.js"></script>
-        <script src="themes/js/jquery.lightbox-0.5.js"></script>
-
-        <!-- Themes switcher section ============================================================================================= -->
-        <div id="secectionBox">
-            <link rel="stylesheet" href="themes/switch/themeswitch.css" type="text/css" media="screen" />
-            <script src="themes/switch/theamswitcher.js" type="text/javascript" charset="utf-8"></script>
-            <div id="themeContainer">
-                <div id="hideme" class="themeTitle">Style Selector</div>
-                <div class="themeName">Oregional Skin</div>
-                <div class="images style">
-                    <a href="themes/css/#" name="bootshop"><img src="themes/switch/images/clr/bootshop.png" alt="bootstrap business templates" class="active"></a>
-                    <a href="themes/css/#" name="businessltd"><img src="themes/switch/images/clr/businessltd.png" alt="bootstrap business templates" class="active"></a>
-                </div>
-                <div class="themeName">Bootswatch Skins (11)</div>
-                <div class="images style">
-                    <a href="themes/css/#" name="amelia" title="Amelia"><img src="themes/switch/images/clr/amelia.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="spruce" title="Spruce"><img src="themes/switch/images/clr/spruce.png" alt="bootstrap business templates" ></a>
-                    <a href="themes/css/#" name="superhero" title="Superhero"><img src="themes/switch/images/clr/superhero.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="cyborg"><img src="themes/switch/images/clr/cyborg.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="cerulean"><img src="themes/switch/images/clr/cerulean.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="journal"><img src="themes/switch/images/clr/journal.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="readable"><img src="themes/switch/images/clr/readable.png" alt="bootstrap business templates"></a>	
-                    <a href="themes/css/#" name="simplex"><img src="themes/switch/images/clr/simplex.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="slate"><img src="themes/switch/images/clr/slate.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="spacelab"><img src="themes/switch/images/clr/spacelab.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="united"><img src="themes/switch/images/clr/united.png" alt="bootstrap business templates"></a>
-                    <p style="margin:0;line-height:normal;margin-left:-10px;display:none;"><small>These are just examples and you can build your own color scheme in the backend.</small></p>
-                </div>
-                <div class="themeName">Background Patterns </div>
-                <div class="images patterns">
-                    <a href="themes/css/#" name="pattern1"><img src="themes/switch/images/pattern/pattern1.png" alt="bootstrap business templates" class="active"></a>
-                    <a href="themes/css/#" name="pattern2"><img src="themes/switch/images/pattern/pattern2.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern3"><img src="themes/switch/images/pattern/pattern3.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern4"><img src="themes/switch/images/pattern/pattern4.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern5"><img src="themes/switch/images/pattern/pattern5.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern6"><img src="themes/switch/images/pattern/pattern6.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern7"><img src="themes/switch/images/pattern/pattern7.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern8"><img src="themes/switch/images/pattern/pattern8.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern9"><img src="themes/switch/images/pattern/pattern9.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern10"><img src="themes/switch/images/pattern/pattern10.png" alt="bootstrap business templates"></a>
-
-                    <a href="themes/css/#" name="pattern11"><img src="themes/switch/images/pattern/pattern11.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern12"><img src="themes/switch/images/pattern/pattern12.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern13"><img src="themes/switch/images/pattern/pattern13.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern14"><img src="themes/switch/images/pattern/pattern14.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern15"><img src="themes/switch/images/pattern/pattern15.png" alt="bootstrap business templates"></a>
-
-                    <a href="themes/css/#" name="pattern16"><img src="themes/switch/images/pattern/pattern16.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern17"><img src="themes/switch/images/pattern/pattern17.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern18"><img src="themes/switch/images/pattern/pattern18.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern19"><img src="themes/switch/images/pattern/pattern19.png" alt="bootstrap business templates"></a>
-                    <a href="themes/css/#" name="pattern20"><img src="themes/switch/images/pattern/pattern20.png" alt="bootstrap business templates"></a>
 
                 </div>
             </div>
         </div>
-        <span id="themesBtn"></span>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(login).on('hidden', function () {
-                    $(login_failed).hide();
-                    var location = window.location.href;
-                    if (location.indexOf("EditProfile") === -1) {
-                        window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "EditProfile";  
-                    } 
-                });
+    </div>
+    <!-- Footer ================================================================== -->
+    <jsp:include page="footer.jsp"/>
+    <!-- Placed at the end of the document so the pages load faster ============================================= -->
+    <script src="themes/js/jquery.js" type="text/javascript"></script>
+    <script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="themes/js/google-code-prettify/prettify.js"></script>
+
+    <script src="themes/js/bootshop.js"></script>
+    <script src="themes/js/jquery.lightbox-0.5.js"></script>
+
+    <!-- Themes switcher section ============================================================================================= -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(login).on('hidden', function () {
+                $(login_failed).hide();
+                var location = window.location.href;
+                if (location.indexOf("EditProfile") === -1) {
+                    window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "EditProfile";
+                }
             });
-        </script>
-    </body>
+        });
+    </script>
+</body>
 </html>

@@ -43,7 +43,7 @@
         <jsp:include page="/admin/adminHeader.jsp"/>
     </div>
     <!-- Header End====================================================================== -->
-    <div id="mainBody">
+    <div id="mainBody" style="min-height:405px;">
         <div class="container">
             <div class="row">
                 <div class="span9">
@@ -70,7 +70,6 @@
                                 <div>
                                     <label for="">Category</label>
                                     <select class="srchTxt" name="pCategory">
-                                        <option>All</option>
                                         <option>CLOTHES </option>
                                         <option>FOOD AND BEVERAGES </option>
                                         <option>HEALTH & BEAUTY </option>
@@ -129,7 +128,7 @@
     <script src="themes/js/jquery.lightbox-0.5.js"></script>
 
     <!-- Themes switcher section ============================================================================================= -->
-    <div id="secectionBox">
+<!--    <div id="secectionBox">
         <link rel="stylesheet" href="themes/switch/themeswitch.css" type="text/css" media="screen" />
         <script src="themes/switch/theamswitcher.js" type="text/javascript" charset="utf-8"></script>
         <div id="themeContainer">
@@ -182,6 +181,6 @@
             </div>
         </div>
     </div>
-    <span id="themesBtn"></span>
+    <span id="themesBtn"></span>-->
 </body>
 </html>

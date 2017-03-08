@@ -35,12 +35,14 @@ public class IncreaseCartItem extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(true);
         HashMap<Integer, CartItem> cartItems = (HashMap<Integer, CartItem>) session.getAttribute("products");
-        int ProductId=Integer.parseInt(request.getParameter("pId"));
+        int ProductId = Integer.parseInt(request.getParameter("pId"));
         CartItem cartItem = cartItems.get(ProductId);
-        cartItem.setQuantity(cartItem.getQuantity() +1);
-        cartItems.put(ProductId,cartItem);
+        if (cartItem.getQuantity() < cartItem.getProduct().getStockQuantity()) {
+            cartItem.setQuantity(cartItem.getQuantity() + 1);
+        }
+        cartItems.put(ProductId, cartItem);
         //session.setAttribute("products", cartItems);
         response.sendRedirect("cart.jsp");
     }
