@@ -170,7 +170,7 @@
                     $(login_failed).hide();
                     var location = window.location.href;
                     var originLocation = "ProductDetails?pId=";
-                    originLocation.concat(${sessionScope.product_id});
+                            originLocation.concat(${sessionScope.product_id});
                     if (location.indexOf(originLocation) === -1) {
                         window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + originLocation;
                     }
