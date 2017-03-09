@@ -44,8 +44,6 @@ public class LoginServlet extends HttpServlet {
             String userEmail = request.getParameter("email");
             User user = db.checkLogin(userEmail, request.getParameter("password"));
             if (user != null && !user.getRole().equals(User.getROLE_ADMIN())) {
-                HttpSession session1 = request.getSession(true);
-                session1.invalidate();
                 HttpSession session = request.getSession(true);
                 session.setAttribute("logged", user);
 

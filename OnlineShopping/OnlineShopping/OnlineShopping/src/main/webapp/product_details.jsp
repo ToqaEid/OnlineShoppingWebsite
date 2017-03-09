@@ -85,7 +85,7 @@
                                             <input type="number" class="span1" name="pQuantity" placeholder="Qty." value="1" min="1" max ="<c:out value="${requestScope.product_details.stockQuantity}"/>"/>
                                         </div>
                                         <hr class="soft"/>
-                                        <input type="Hidden" name="pId" value="1"/>
+                                        <input type="Hidden" name="pId" value="${requestScope.product_details.id}"/>
 
                                         <c:if test="${requestScope.product_details.stockQuantity>0}">
                                             <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>

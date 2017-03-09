@@ -126,7 +126,7 @@
                                         <c:forEach items="${requestScope.ordersList}" var="order">
                                             <tr class="odd gradeX">
                                                 <td>${order.id}</td>
-                                                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${order.date}" /></td>
+                                                <td><fmt:formatDate type="date" pattern="MMMMM d, yyyy" value="${order.date}" /></td>
                                                 <td><fmt:formatDate type="time" value="${order.date}" /></td>
                                                 <td class="center">${order.product.id}</td>
                                                 <td class="center">${order.quantity}</td>
