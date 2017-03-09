@@ -6,18 +6,17 @@
 package com.jets.onlineshopping.controller;
 
 import com.jets.onlineshopping.dao.DBHandler;
-import com.jets.onlineshopping.dto.CartItem;
 import com.jets.onlineshopping.dto.Product;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,35 +37,41 @@ public class ProductDetails extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DBHandler db = new DBHandler();
-        //get product id from request
-        int productId = Integer.parseInt(request.getParameter("pId"));
-        //get product details from db 
-        Product p =db.getProduct(productId);
-        //put it on the response to be used by product_details.jsp
-        request.setAttribute("product_details",p);
+        String queryString = request.getQueryString();
 
-        //related products  //till now i get all products we need function in db to get certain amount of products or add products on session 
-        ArrayList<Product> relatedProductsFromDB = db.getProducts();
-        ArrayList<Product> relatedProducts = new ArrayList<>();
-        
-        int numOfRelatedProducts;
-        if(relatedProductsFromDB.size()> 6){
-            numOfRelatedProducts = 6;
-        }else{
-            numOfRelatedProducts = relatedProductsFromDB.size();
+        if (queryString != null) {
+            Pattern pattern = Pattern.compile("^pId=.+$", Pattern.CASE_INSENSITIVE);
+            Matcher match = pattern.matcher(queryString);
+            if (match.find()) {
+                //get product id from request
+                int productId = Integer.parseInt(request.getParameter("pId"));
+                //get product details from db 
+                request.getSession(true).setAttribute("pId", productId);
+                Product p = db.getProduct(productId);
+                //put it on the response to be used by product_details.jsp
+                request.setAttribute("product_details", p);
+
+                //related products  //till now i get all products we need function in db to get certain amount of products or add products on session 
+                ArrayList<Product> relatedProductsFromDB = db.getProducts();
+                ArrayList<Product> relatedProducts = new ArrayList<>();
+
+                int numOfRelatedProducts;
+                if (relatedProductsFromDB.size() > 6) {
+                    numOfRelatedProducts = 6;
+                } else {
+                    numOfRelatedProducts = relatedProductsFromDB.size();
+                }
+                for (int i = 0; i < numOfRelatedProducts; i++) {
+                    relatedProducts.add(relatedProductsFromDB.get(i));
+                }
+                request.setAttribute("related_products", relatedProducts);
+                //go to jsp page 
+                RequestDispatcher rd = request.getRequestDispatcher("product_details.jsp");
+                rd.forward(request, response);
+                return;
+            }
         }
-        for (int i = 0; i < numOfRelatedProducts; i++) {
-            relatedProducts.add(relatedProductsFromDB.get(i));
-        }
-        request.setAttribute("related_products", relatedProducts);
-        //go to jsp page 
-        RequestDispatcher rd = request.getRequestDispatcher("product_details.jsp");
-        rd.forward(request, response);
-        
-        
-        
-        
-        
+        response.sendRedirect("HomeServlet");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

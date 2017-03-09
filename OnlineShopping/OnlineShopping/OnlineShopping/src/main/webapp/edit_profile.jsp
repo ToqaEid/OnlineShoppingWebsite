@@ -182,16 +182,5 @@
             </div>
         </div>
         <span id="themesBtn"></span>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(login).on('hidden', function () {
-                    $(login_failed).hide();
-                    var location = window.location.href;
-                    if (location.indexOf("EditProfile") === -1) {
-                        window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "EditProfile";  
-                    } 
-                });
-            });
-        </script>
     </body>
 </html>

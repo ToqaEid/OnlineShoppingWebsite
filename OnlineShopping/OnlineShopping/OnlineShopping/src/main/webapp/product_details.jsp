@@ -207,15 +207,25 @@
         <span id="themesBtn"></span>
         <script type="text/javascript">
             $(document).ready(function () {
-                $(login).on('hidden', function () {
-                    $(login_failed).hide();
+                var updateUrl = function() {
                     var location = window.location.href;
                     var originLocation = "ProductDetails?pId=";
-                    originLocation.concat(${sessionScope.product_id});
+                    originLocation = originLocation.concat(${sessionScope.pId});
                     if (location.indexOf(originLocation) === -1) {
                         window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + originLocation;  
-                    } 
-                });
+                    }  
+                };
+                
+                <c:if test="${empty sessionScope.logged}">
+                    $(login).on('hidden', function () {
+                        $(login_failed).hide();
+                        updateUrl();
+                    });
+                </c:if>
+                
+                <c:if test="${!empty sessionScope.logged}">
+                    updateUrl();
+                </c:if>
             });
         </script>
     </body>

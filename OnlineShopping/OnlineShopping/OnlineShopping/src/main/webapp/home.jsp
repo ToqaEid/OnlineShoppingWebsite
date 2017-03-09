@@ -73,7 +73,7 @@
                             <div class="alert alert-block alert-success fade in">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
                                 <c:out value="${requestScope.success}"/>
-                            </div>
+                            </div> 
                         </c:if>
                         <h4>Category Products </h4>
                         <ul class="thumbnails">
@@ -88,7 +88,14 @@
                                                 <a class="btn btn-primary">$<c:out value="${product.price}"/></a>
                                             </p>
 
-                                            <h4 style="text-align:center"><a class="btn" href="ProductDetails?pId=${product.id}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="AddCartServlet?pId=${product.id}&pQuantity=1">Add to <i class="icon-shopping-cart"></i></a></h4>
+                                            <h4 style="text-align:center">
+                                                <form action="ProductDetails" method="GET" style="float:left;">
+                                                    <input name="pId" type="hidden" value="${product.id}" />
+                                                    <button type="submit" >
+                                                        <i class="icon-zoom-in"></i>
+                                                    </button>
+                                                </form><a class="btn" href="AddCartServlet?pId=${product.id}&pQuantity=1">Add to <i class="icon-shopping-cart"></i></a>
+                                            </h4>
                                         </div>
                                     </div>
                                 </li>
@@ -231,19 +238,24 @@
                 if (location.indexOf("SignOutServlet") !== -1) {
                     window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "HomeServlet";  
                 } 
-
-                $(login).on('hidden', function () {
-                    $(login_failed).hide();
+                
+                var updateUrl = function() {
                     var location = window.location.href;
                     if (location.indexOf("HomeServlet") === -1) {
                         window.location.href = location.substring(0, location.lastIndexOf('/') + 1) + "HomeServlet";  
                     } 
-                });
+                };
                 
-                $('.btn').click(function() {
-                    <c:set var="product_id" scope="session" />
-                    $('#${product_id}') = $(this).attr("href").split('=')[1];
-                });
+                <c:if test="${empty sessionScope.logged}">
+                    $(login).on('hidden', function () {
+                        $(login_failed).hide();
+                        updateUrl();
+                    });
+                </c:if>
+                
+                <c:if test="${!empty sessionScope.logged}">
+                    updateUrl();
+                </c:if>
             });
         </script>
     </body>
