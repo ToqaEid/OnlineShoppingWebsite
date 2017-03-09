@@ -43,15 +43,26 @@
         <jsp:include page="/admin/adminHeader.jsp"/>
     </div>
     <!-- Header End====================================================================== -->
-    <div id="mainBody">
+    <div id="mainBody" style="min-height:405px;">
         <div class="container">
             <div class="row">
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-                        <li><a href="products.html">Products</a> <span class="divider">/</span></li>
+                        <li><a href="/OnlineShopping/admin">Home</a> <span class="divider">/</span></li>
                         <li class="active">product Details</li>
                     </ul>	
+                    <c:if test="${!empty requestScope.errorMsg}">
+                            <div class="alert alert-block alert-error fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <c:out value="${requestScope.errorMsg}"/>
+                            </div>
+                        </c:if>
+                        <c:if test="${!empty requestScope.success}">
+                            <div class="alert alert-block alert-success fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <c:out value="${requestScope.success}"/>
+                            </div>
+                        </c:if>
                     <div class="row">	  
                         <div id="gallery" class="span3">
                             <a href="${url}" title="">
@@ -70,7 +81,6 @@
                                 <div>
                                     <label for="">Category</label>
                                     <select class="srchTxt" name="pCategory">
-                                        <option>All</option>
                                         <option>CLOTHES </option>
                                         <option>FOOD AND BEVERAGES </option>
                                         <option>HEALTH & BEAUTY </option>
@@ -80,9 +90,9 @@
                                     <hr>
                                 </div>
                                 <div class="control-group">
-                                    <span><input type="text" name="pPrice" placeholder="Price" style="width:10%; " required></span>
+                                    <span><input type="text" name="pPrice" placeholder="Price" style="width:10%; " pattern="[0-9]*" required></span>
                                     <span>
-                                        <input class="quantity" type="text" name="pQuantity" placeholder="Quantity" style="width:10%; margin-left:25%;" required></span>
+                                        <input class="quantity" type="text" name="pQuantity" placeholder="Quantity" style="width:10%; margin-left:25%;"  pattern="[0-9]*" required></span>
                                     <button type="submit" class="btn btn-large btn-primary pull-right"> Add </button>
                                 </div>
                         </div>
@@ -129,7 +139,7 @@
     <script src="themes/js/jquery.lightbox-0.5.js"></script>
 
     <!-- Themes switcher section ============================================================================================= -->
-    <div id="secectionBox">
+<!--    <div id="secectionBox">
         <link rel="stylesheet" href="themes/switch/themeswitch.css" type="text/css" media="screen" />
         <script src="themes/switch/theamswitcher.js" type="text/javascript" charset="utf-8"></script>
         <div id="themeContainer">
@@ -182,6 +192,6 @@
             </div>
         </div>
     </div>
-    <span id="themesBtn"></span>
+    <span id="themesBtn"></span>-->
 </body>
 </html>

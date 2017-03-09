@@ -7,6 +7,7 @@ package com.jets.onlineshopping.admin.controller;
 
 import com.jets.onlineshopping.dao.DBHandler;
 import com.jets.onlineshopping.dto.Product;
+import com.jets.onlineshopping.dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,6 +35,14 @@ public class AddNewProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("admin_logged");
+        System.out.println(user);
+        if (user == null) {    //user not logged in 
+            request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
+            return;
+            //response.sendRedirect("/admin/login.jsp");
+        }
         String url = request.getParameter("url").equals("")?"default_image.jpg":request.getParameter("url");
         System.out.println(url);
         String name = request.getParameter("pName");
@@ -43,14 +53,15 @@ public class AddNewProductServlet extends HttpServlet {
         if(desc == null){
             desc="No Description";
         }
-        //request.getParameter("pURL");
         
         Product pro = new Product(price, quantity, name, desc, cat,url);
         //Create DB handler object 
         DBHandler db = new DBHandler();
         //add product in db
         if(db.insertProduct(pro)){
-            response.sendRedirect("/OnlineShopping");
+            request.setAttribute("success", "Product added successfully");
+            request.getRequestDispatcher("admin").forward(request, response);
+            //response.sendRedirect("/OnlineShopping");
         }else{
             request.setAttribute("errormsg", "Product is not inserted successfully" );
             request.getRequestDispatcher("/admin/add_product.jsp").forward(request, response);

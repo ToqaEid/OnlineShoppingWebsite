@@ -52,13 +52,16 @@ public class LoginServlet extends HttpServlet {
                 for (CartItem cartItem : cartItems) {
                     cartItemsOnSession.put(cartItem.getProduct().getId(), cartItem);
                 }
-                if(session.getAttribute("products")!=null){
+                if (session.getAttribute("products") != null) {
                     HashMap<Integer, CartItem> sessionProducts = (HashMap<Integer, CartItem>) session.getAttribute("products");
                     sessionProducts.putAll(cartItemsOnSession);
                     session.setAttribute("products", sessionProducts);
-                }else
-                    session.setAttribute("products", cartItemsOnSession);                
+                } else {
+                    session.setAttribute("products", cartItemsOnSession);
+                }
                 db.deleteAllCartItems(userEmail);
+                
+                session.setAttribute("success", "Welcome "+user.getName());
             } else {
                 // Wrong email or password
                 request.setAttribute("login_failed", true);

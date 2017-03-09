@@ -62,7 +62,7 @@ public class BuyServlet extends HttpServlet {
             ArrayList<Product> stockProducts = new ArrayList<>();
             //error msg
             String errormsg = "";
-            if (cartPro != null) {
+            if (cartPro != null && cartPro.size()>0) {
                 if (!cartPro.isEmpty()) { //there're products in the cart 
                     for (CartItem cartProduct : cartPro.values()) {
                         Product p = db.getProduct(cartProduct.getProduct().getId());
@@ -103,10 +103,14 @@ public class BuyServlet extends HttpServlet {
                         return;
                     }
                 }
+            } else {
+                request.setAttribute("errorMsg", "You got nothing to buy.");
+                request.getRequestDispatcher("HomeServlet").forward(request, response);
+                return;
             }
         } else {  //user not logged in 
-            session.setAttribute("errorMsg", "You must be logged in first before buying");
-            request.getRequestDispatcher("HomeServlet").forward(request,response);
+            request.setAttribute("errorMsg", "You must be logged in first before buying");
+            request.getRequestDispatcher("HomeServlet").forward(request, response);
             return;
         }
     }

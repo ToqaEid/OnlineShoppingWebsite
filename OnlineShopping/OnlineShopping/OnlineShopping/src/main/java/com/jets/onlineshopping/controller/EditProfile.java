@@ -58,9 +58,13 @@ public class EditProfile extends HttpServlet {
         String job = request.getParameter("job");
         String address = request.getParameter("address");
         User user = new User(sessionUser.getEmail(), name, password, date, job,sessionUser.getCreditLimit(), address,sessionUser.getRole());
+        Date newDate = new java.sql.Date(user.getBirthdate().getTime());
+        User userLogged = new User(sessionUser.getEmail(), name, password, newDate, job,sessionUser.getCreditLimit(), address,sessionUser.getRole());
+        System.out.println(user);
+        System.out.println(userLogged);
         
         new DBHandler().updateUser(user);
-        session.setAttribute("logged", user);
+        session.setAttribute("logged", userLogged);
         String referer = request.getHeader("Referer");
         response.sendRedirect(referer);
     }

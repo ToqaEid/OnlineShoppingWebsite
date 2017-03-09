@@ -19,8 +19,8 @@
                                     <div class="modal-body">
                                         <form action="GenerateCoupons" method="post" class="form-horizontal loginFrm">
                                             <div class="control-group">
-                                                <label for="coupons_credit">Coupons Credit</Label>
-                                                <input type="text" name="coupons_credit" id="coupons_credit">
+                                                <label for="coupons_credit">Coupon's Credit</Label>
+                                                <input type="text" name="coupons_credit" id="coupons_credit" pattern="[0-9]{1,8}" required="true">
                                                 
                                             </div>
                                             <div class="control-group">
@@ -36,7 +36,7 @@
                                 </div>
 							</div>
 		<ul id="sideManu" class="nav nav-tabs nav-stacked">
-			<li><a href="customer_profiles.html">CUSTOMER PROFILES</a></li>
+			<li><a href="admin/customer_profiles">CUSTOMER PROFILES</a></li>
                         <li><a href="/OnlineShopping/ViewCoupons">View Coupons</a></li>
 			<li><a href="/OnlineShopping/admin/add_product.jsp">NEW ARRIVAL</a></li>
 			<li class="subMenu"><a>FOOD AND BEVERAGES [1000]</a></li>

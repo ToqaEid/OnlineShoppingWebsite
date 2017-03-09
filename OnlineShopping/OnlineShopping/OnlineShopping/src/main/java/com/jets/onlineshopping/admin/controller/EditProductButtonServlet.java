@@ -52,7 +52,9 @@ public class EditProductButtonServlet extends HttpServlet {
         DBHandler db = new DBHandler();
         //update product in db
         if(db.updateProduct(pro)){
-            response.sendRedirect("admin");
+            request.setAttribute("success", "Product edited successfully");
+            request.getRequestDispatcher("admin").forward(request, response);
+            return;
         }else{
             request.setAttribute("errormsg", "Product is not updated");
             request.getRequestDispatcher("/OnlineShopping/EditProductServlet?pId="+pId).forward(request, response);

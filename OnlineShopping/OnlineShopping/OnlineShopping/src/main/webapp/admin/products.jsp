@@ -18,9 +18,7 @@
         <script src="themes/js/less.js" type="text/javascript"></script> -->
 
         <!-- Bootstrap style --> 
-        <script src="themes/js/jquery.js" type="text/javascript"></script> 
-        <script src="/OnlineShopping/bootstrap/js/script.js"></script>
-        
+        <script src="bootstrap/js/script.js"></script>
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
         <link href="admin/themes/css/base.css" rel="stylesheet" media="screen"/>
         <!-- Bootstrap style responsive -->	
@@ -41,13 +39,28 @@
         <jsp:include page="/admin/adminHeader.jsp"/>
     </div>
     <!-- Header End====================================================================== -->
-    <div id="mainBody">
+    
+    <div id="mainBody" style="min-height:405px;">
         <div class="container">
             <div class="row">
+                 
                 <!-- Sidebar ================================================== -->
                 <jsp:include page="Sidebar.jsp"/>
                 <!-- Sidebar end=============================================== -->
+               
                 <div class="span9">
+                    <c:if test="${!empty requestScope.errorMsg}">
+                            <div class="alert alert-block alert-error fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <c:out value="${requestScope.errorMsg}"/>
+                            </div>
+                        </c:if>
+                        <c:if test="${!empty requestScope.success}">
+                            <div class="alert alert-block alert-success fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <c:out value="${requestScope.success}"/>
+                            </div>
+                        </c:if>
                     <ul class="breadcrumb">
                         <li><a href="home">Home</a> <span class="divider">/</span></li>
                         <li class="active">Products Name</li>
@@ -63,8 +76,10 @@
                             <ul class="thumbnails">
                                 <c:forEach items="${requestScope.homeProducts}" var="product">
                                     <li class="span3">
-                                        <div class="thumbnail">
-                                            <a href="product_details.html"><img src="${product.url}" alt=""/></a>
+                                        <div class="thumbnail" >
+                                            <a href="product_details.html" >
+                                                <img src="${product.url}" alt="" style="width:260px; height:200px"/>
+                                            </a>
                                             <div class="caption">
                                                 <h5><c:out value="${product.name}"/></h5>
                                                 <p> 
@@ -169,18 +184,6 @@
 <script src="themes/js/jquery.js" type="text/javascript"></script>
 <script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="themes/js/google-code-prettify/prettify.js"></script>
-
-<a href="themes/css/#" name="pattern11"><img src="themes/switch/images/pattern/pattern11.png" alt="bootstrap business templates"></a>
-<a href="themes/css/#" name="pattern12"><img src="themes/switch/images/pattern/pattern12.png" alt="bootstrap business templates"></a>
-<a href="themes/css/#" name="pattern13"><img src="themes/switch/images/pattern/pattern13.png" alt="bootstrap business templates"></a>
-<a href="themes/css/#" name="pattern14"><img src="themes/switch/images/pattern/pattern14.png" alt="bootstrap business templates"></a>
-<a href="themes/css/#" name="pattern15"><img src="themes/switch/images/pattern/pattern15.png" alt="bootstrap business templates"></a>
-
-<a href="themes/css/#" name="pattern16"><img src="themes/switch/images/pattern/pattern16.png" alt="bootstrap business templates"></a>
-<a href="themes/css/#" name="pattern17"><img src="themes/switch/images/pattern/pattern17.png" alt="bootstrap business templates"></a>
-<a href="themes/css/#" name="pattern18"><img src="themes/switch/images/pattern/pattern18.png" alt="bootstrap business templates"></a>
-<a href="themes/css/#" name="pattern19"><img src="themes/switch/images/pattern/pattern19.png" alt="bootstrap business templates"></a>
-<a href="themes/css/#" name="pattern20"><img src="themes/switch/images/pattern/pattern20.png" alt="bootstrap business templates"></a>
 
 </div>
 </div>

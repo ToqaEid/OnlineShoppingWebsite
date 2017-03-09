@@ -38,8 +38,9 @@ public class adminSearch extends HttpServlet {
         String searchCategory = request.getParameter("searchCategory");
         ArrayList<Product> products;
         
+        
         if(searchCategory==null || searchText == null){
-            response.sendRedirect("home");
+            response.sendRedirect("/admin");
             return;
         }
             
@@ -49,7 +50,7 @@ public class adminSearch extends HttpServlet {
             products = new DBHandler().searchProductByCategory(searchText.toLowerCase(), searchCategory.toLowerCase());
         }
         request.setAttribute("homeProducts", products);
-        request.getRequestDispatcher("products.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

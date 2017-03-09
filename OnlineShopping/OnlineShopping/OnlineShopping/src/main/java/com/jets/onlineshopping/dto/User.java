@@ -13,6 +13,11 @@ import java.util.Date;
  */
 public class User {
 
+    @Override
+    public String toString() {
+        return "User{" + "email=" + email + ", name=" + name + ", password=" + password + ", birthdate=" + birthdate + ", job=" + job + ", creditLimit=" + creditLimit + ", address=" + address + ", role=" + role + '}';
+    }
+
     private String email;
     private String name;
     private String password;
